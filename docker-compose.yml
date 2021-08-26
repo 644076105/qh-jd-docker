@@ -1,0 +1,76 @@
+version: "2.1"
+x-logger: &logger
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "3"
+x-common: &common
+  image: qh-jd-docker-local:latest
+  build:
+    context: .
+    dockerfile: ./Dockerfile
+  restart: "no"
+services:
+  jdqh:
+    <<: [ *logger, *common ]
+    container_name: jdqh
+    volumes:
+    - ./env/all:/all
+    - ./env/envqh:/env
+  jdqhcoin:
+    <<: [ *logger, *common ]
+    container_name: jdqhcoin
+    volumes:
+    - ./env/all:/all
+    - ./env/envqh:/env
+  jdwys:
+    <<: [ *logger, *common ]
+    container_name: jdwys
+    volumes:
+    - ./env/all:/all
+    - ./env/envwys:/env
+  jdwyscoin:
+    <<: [ *logger, *common ]
+    container_name: jdwyscoin
+    volumes:
+    - ./env/all:/all
+    - ./env/envwys:/env
+  jdkjj:
+    <<: [ *logger, *common ]
+    container_name: jdkjj
+    volumes:
+    - ./env/all:/all
+    - ./env/envkjj:/env
+  jdffj136:
+    <<: [ *logger, *common ]
+    container_name: jdffj136
+    volumes:
+    - ./env/all:/all
+    - ./env/envffj136:/env
+  jdffj180:
+    <<: [ *logger, *common ]
+    container_name: jdffj180
+    volumes:
+    - ./env/all:/all
+    - ./env/envffj180:/env
+  jdqjh198:
+    <<: [ *logger, *common ]
+    container_name: jdqjh198
+    volumes:
+    - ./env/all:/all
+    - ./env/envqjh198:/env
+  jdqjh180:
+    <<: [ *logger, *common ]
+    container_name: jdqjh180
+    volumes:
+    - ./env/all:/all
+    - ./env/envqjh180:/env
+  jdqjh137:
+    <<: [ *logger, *common ]
+    container_name: jdqjh137
+    volumes:
+    - ./env/all:/all
+    - ./env/envqjh137:/env
+  
+  
