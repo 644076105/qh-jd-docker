@@ -166,8 +166,10 @@
 # 京东到家
 3 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_bean.js"
 10 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_fruit.js"
+## 定时收集water
+0/5 * * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_collectWater.js"
 
-17 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_getPoints.js"
+0/12 * * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_getPoints.js"
 
 30 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_plantBeans.js"
 
