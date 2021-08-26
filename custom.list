@@ -173,6 +173,7 @@
 
 30 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_plantBeans.js"
 
+
 # 开学充电站
 11 1,9 * * * bash /cron_wrapper " node /jd_scripts/jd_kxcdz.js"
 
