@@ -1,0 +1,15 @@
+#!/bin/bash
+exec 1<>/proc/1/fd/1
+exec 2<>/proc/1/fd/2
+set -o allexport
+source /all
+source /env
+cd /jd_scripts || {
+  echo [error]: no jd-scripts dir
+  exit 1
+}
+cmd='bash -c'
+log=$(echo "$*" | grep -o '[^ /]*.js')
+logdir='/logs'
+echo "run time:$(date)" > ${logdir}/$log-js-log
+$cmd "$*" | sed "s/^/[$log]: /g" >> ${logdir}/$log-js-log
