@@ -1,0 +1,11 @@
+#!/bin/bash
+set -a;source /all;source /env;
+guaopencard6="true"
+guaopencard12="true"
+guaopencard13="true"
+guaopencard14="true"
+guaopencard15="true"
+guaopencard16="true"
+cd /jd_scripts
+ls gua_opencard*.js | xargs -i node {}
+
