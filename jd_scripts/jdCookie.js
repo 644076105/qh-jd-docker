@@ -3,7 +3,6 @@
  */
 //此处填写京东账号cookie。
 let CookieJDs = [
-  "pt_key=AAJhJokTADBZwt9x6ZAu_rSKlg7CMmfWf_SV97pUF90P2NOO-hgWBedKHBy2aRW5DMDTd_F8ecM;pt_pin=jd_59417aeb07201;"
 ]
 // 判断环境变量里面是否有京东ck
 if (process.env.JD_COOKIE) {
