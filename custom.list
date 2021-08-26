@@ -31,13 +31,13 @@
 45 6-18/6 * * * bash /cron_wrapper " node /jd_scripts/jd_fruit_moreTask"
 # 宠汪汪
 45 */2,23 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_new.js"
-0 0-16/8 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_reward.js"
+0 0-16/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_reward.js"
 35 */1 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_park.js"
 #10 13-20/1 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_run.js"
 # 摇钱树
 23 */2 * * * bash /cron_wrapper " node /jd_scripts/jd_moneyTree.js"
 # 东东萌宠
-35 6-18/6 * * * bash /cron_wrapper " node /jd_scripts/jd_pet.js"
+35 6-18/3 * * * bash /cron_wrapper " node /jd_scripts/jd_pet.js"
 # 种豆得豆
 10 7-22/1 * * * bash /cron_wrapper " node /jd_scripts/jd_plantBean.js"
 # 全民开红包
@@ -59,11 +59,11 @@
 # 天天提鹅
 28 * * * * bash /cron_wrapper " node /jd_scripts/jd_daily_egg.js"
 # 京东金融养猪
-32 0-23/6 * * * bash /cron_wrapper " node /jd_scripts/jd_pigPet.js"
+32 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_pigPet.js"
 # 京喜工厂
 50 * * * * bash /cron_wrapper " node /jd_scripts/jd_dreamFactory.js"
 # 小窝
-46 6,23 * * * bash /cron_wrapper " node /jd_scripts/jd_small_home.js"
+46 6-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_small_home.js"
 # 京东工厂
 26 * * * * bash /cron_wrapper " node /jd_scripts/jd_jdfactory.js"
 # 十元街
@@ -71,18 +71,18 @@
 # 京东快递签到
 47 1 * * * bash /cron_wrapper " node /jd_scripts/jd_kd.js"
 # 京东汽车
-0 0 * * * bash /cron_wrapper " node /jd_scripts/jd_car.js"
+1 0 * * * bash /cron_wrapper " node /jd_scripts/jd_car.js"
 # 额外领京豆
 23 1,12,22 * * * bash /cron_wrapper " node /jd_scripts/jd_bean_home.js"
-47 3 * * * bash /cron_wrapper " node /jd_scripts/jd_bean_box.js"
-# 领白天券
-3 0 * * * bash /cron_wrapper " node /jd_scripts/jd_baitiao.js"
+47 3,9,16,22 * * * bash /cron_wrapper " node /jd_scripts/jd_bean_box.js"
+# 领白条券
+3 0-23/6 * * * bash /cron_wrapper " node /jd_scripts/jd_baitiao.js"
 # 京东赚赚
 6 0-5/1,11 * * * bash /cron_wrapper " node /jd_scripts/jd_jdzz.js"
 # 疯狂的joy
 #30 7,23 * * * bash /cron_wrapper " node /jd_scripts/jd_crazy_joy.js"
 # 京东汽车兑换
-0 0 * * * bash /cron_wrapper " node /jd_scripts/jd_car_exchange.js"
+0 0-8/2 * * * bash /cron_wrapper " node /jd_scripts/jd_car_exchange.js"
 #23 7 * * * bash /cron_wrapper " node /jd_scripts/jd_get_share_code.js"
 # 京东图书
 38 8,12,18 * * * bash /cron_wrapper " node /jd_scripts/jd_bookshop.js"
@@ -91,9 +91,9 @@
 # 领现金
 10 */4 * * * bash /cron_wrapper " node /jd_scripts/jd_cash.js"
 #   闪购盲盒
-47 8,22 * * * bash /cron_wrapper " node /jd_scripts/jd_sgmh.js"
+47 8-22/4 * * * bash /cron_wrapper " node /jd_scripts/jd_sgmh.js"
 # 秒秒币
-10 6,21 * * * bash /cron_wrapper " node /jd_scripts/jd_ms.js"
+10 4-22/4 * * * bash /cron_wrapper " node /jd_scripts/jd_ms.js"
 # 美丽研究院
 41 7,12,19 * * * bash /cron_wrapper " node /jd_scripts/jd_beauty.js"
 # 保价
@@ -114,7 +114,7 @@
 #
 10 10,23 * * * bash /cron_wrapper " node /jd_scripts/jd_market_lottery.js"
 # 金贴
-5 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jin_tie.js"
+5 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_jin_tie.js"
 #
 15 0,12,22 * * * bash /cron_wrapper " node /jd_scripts/jd_jump.js"
 # 京喜牧场
@@ -135,7 +135,7 @@
 1 7 * * * bash /cron_wrapper " node /jd_scripts/jd_mcxhd.js"
 
 #
-5 0 19,20 1 * bash /cron_wrapper " node /jd_scripts/jd_vote.js"
+#5 0 19,20 1 * bash /cron_wrapper " node /jd_scripts/jd_vote.js"
 # 骁龙品牌日
 15 0 * * * bash /cron_wrapper " node /jd_scripts/jd_xl.js"
 # 众筹许愿池
@@ -164,21 +164,21 @@
 4 5 * * * bash /cron_wrapper " node /jd_scripts/jd_industryLottery.js"
 
 # 京东到家
-3 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_bean.js"
-10 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_fruit.js"
+3 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_bean.js"
+10 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_fruit.js"
 
-17 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_getPoints.js"
+17 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_getPoints.js"
 
-30 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_plantBeans.js"
+30 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_plantBeans.js"
 
 # 开学充电站
-11 1 * * * bash /cron_wrapper " node /jd_scripts/jd_kxcdz.js"
+11 1,9 * * * bash /cron_wrapper " node /jd_scripts/jd_kxcdz.js"
 
 # MM领京豆
-29 0 * * * bash /cron_wrapper " node /jd_scripts/jd_ljd.js"
+29 0,10 * * * bash /cron_wrapper " node /jd_scripts/jd_ljd.js"
 
 #京东零食街
-3 3 * * * bash /cron_wrapper " node /jd_scripts/jd_lsj.js"
+3 3,12 * * * bash /cron_wrapper " node /jd_scripts/jd_lsj.js"
 
 # 来电好物季
 #
@@ -188,9 +188,9 @@
 # 汽车生活节
 
 # 京东签到图形验证
-10 0 * * * bash /cron_wrapper " node /jd_scripts/jd_sign_graphics.js"
+10 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_sign_graphics.js"
 # 牛牛 伊利
-30 5 * * * bash /cron_wrapper " node /jd_scripts/jd_yili_cow.js"
+30 5-23/2 * * * bash /cron_wrapper " node /jd_scripts/jd_yili_cow.js"
 # 健康社区收取能量
 50 * * * * bash /cron_wrapper " node /jd_scripts/jd_z_health_energy.js"
 # 京享值pk
