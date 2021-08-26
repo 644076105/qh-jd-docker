@@ -195,6 +195,5 @@
 50 * * * * bash /cron_wrapper " node /jd_scripts/jd_z_health_energy.js"
 # 京享值pk
 3 8,20 * * * bash /cron_wrapper " node /jd_scripts/jd_zoopk.js"
-
 ## 开卡活动
 # gua_opencard*
