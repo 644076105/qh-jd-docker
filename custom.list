@@ -17,7 +17,7 @@
 #京喜领红包
 30 1,6,12,21 * * * bash /cron_wrapper " node /jd_scripts/jd_jxlhb.js"
 # 京喜签到
-7 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jxsign.js"
+0 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jxsign.js"
 #省钱大赢家 翻翻乐
 10,40 * * * * bash /cron_wrapper " node /jd_scripts/jd_big_winner.js"
 # 京东京豆签到
@@ -51,7 +51,7 @@
 #取消直播关注
 45 22 * * * bash /cron_wrapper " node /jd_scripts/jd_unsubscriLive.js"
 # 京豆变化
-20 10 * * * bash /cron_wrapper " node /jd_scripts/jd_bean_change_new.js"
+0 0,12 * * * bash /cron_wrapper " node /jd_scripts/jd_bean_change_new.js"
 # 京东抽奖机
 #0 0,12,23 * * * bash /cron_wrapper " node /jd_scripts/jd_lotteryMachine.js"
 # 京豆排行榜
@@ -164,14 +164,14 @@
 4 5 * * * bash /cron_wrapper " node /jd_scripts/jd_industryLottery.js"
 
 # 京东到家
-3 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_bean.js"
-10 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_fruit.js"
+3 0,6 * * * bash /cron_wrapper " node /jd_scripts/jddj_bean.js"
+10 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jddj_fruit.js"
 ## 定时收集water
-0/5 * * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_collectWater.js"
+0/5 * * * * bash /cron_wrapper " node /jd_scripts/jddj_collectWater.js"
 
-0/12 * * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_getPoints.js"
+0/12 * * * * bash /cron_wrapper " node /jd_scripts/jddj_getPoints.js"
 
-30 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_jddj_plantBeans.js"
+30 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jddj_plantBeans.js"
 
 
 # 开学充电站

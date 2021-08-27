@@ -12,6 +12,12 @@ x-common: &common
     dockerfile: ./Dockerfile
   restart: "no"
 services:
+  jdyzs:
+    <<: [ *logger, *common ]
+    container_name: jdyzs
+    volumes:
+    - ./env/all:/all
+    - ./env/envyzs:/env
   jdqh:
     <<: [ *logger, *common ]
     container_name: jdqh
