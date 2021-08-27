@@ -164,7 +164,7 @@
 4 5 * * * bash /cron_wrapper " node /jd_scripts/jd_industryLottery.js"
 
 # 京东到家
-3 0,6 * * * bash /cron_wrapper " node /jd_scripts/jddj_bean.js"
+#3 0,6 * * * bash /cron_wrapper " node /jd_scripts/jddj_bean.js"
 10 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jddj_fruit.js"
 ## 定时收集water
 0/5 * * * * bash /cron_wrapper " node /jd_scripts/jddj_collectWater.js"
