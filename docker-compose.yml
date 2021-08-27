@@ -24,21 +24,9 @@ services:
     volumes:
     - ./env/all:/all
     - ./env/envqh:/env
-  jdqhcoin:
-    <<: [ *logger, *common ]
-    container_name: jdqhcoin
-    volumes:
-    - ./env/all:/all
-    - ./env/envqh:/env
   jdwys:
     <<: [ *logger, *common ]
     container_name: jdwys
-    volumes:
-    - ./env/all:/all
-    - ./env/envwys:/env
-  jdwyscoin:
-    <<: [ *logger, *common ]
-    container_name: jdwyscoin
     volumes:
     - ./env/all:/all
     - ./env/envwys:/env
