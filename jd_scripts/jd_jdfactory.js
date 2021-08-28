@@ -53,7 +53,7 @@ if ($.isNode()) {
 let wantProduct = ``;//心仪商品名称
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 const inviteCodes = [
-  ' T0225KkcRUscp1zeIk6gxvAPIQCjVWnYaS5kRrbA@T0225KkcRBwfo1HfJRv0x6ZYcgCjVWnYaS5kRrbA@T0225KkcR01MoVfUJEj3x6EKcQCjVWnYaS5kRrbA@T0205KkcI1tMpzOKQE6W6aJeCjVWnYaS5kRrbA@T0225KkcRxYR9weFchKix_cKcQCjVWnYaS5kRrbA@T020v_1xQBwc91bKIhj2k_AJCjVWnYaS5kRrbA@T0205KkcE3ljsSy1Yl-C5ZdpCjVWnYaS5kRrbA@T0225KkcRx5N9VXWKBr3lqUMIgCjVWnYaS5kRrbA@T008aXnOl5-KCjVWnYaS5kRrbA@T019-akHCV9AgyOKYV-g3LcCjVWnYaS5kRrbA'
+	'T0225KkcRRcd9FOGdUj0k_UKdQCjVWnYaS5kRrbA@T0225KkcRR9N9V2GIB_2wf4IJwCjVWnYaS5kRrbA@T01297cwSRYY9FfXCjVWnYaS5kRrbA@T0225KkcREob_AGBKR_0kvANJwCjVWnYaS5kRrbA@T0156LglEUBOrw2CKRMCjVWnYaS5kRrbA@T0205KkcFmFxnA2xd2W3zJVPCjVWnYaS5kRrbA@T0205KkcP31HqAuUWUyU4aJJCjVWnYaS5kRrbA@T012Z03ZmJ6YIPltCjVWnYaS5kRrbA@T008_6crQRcRCjVWnYaS5kRrbA'
 ];
 let myInviteCode;
 !(async () => {
@@ -81,6 +81,7 @@ let myInviteCode;
         continue
       }
       await shareCodesFormat();
+      //console.log('newShareCodes is ',$.newShareCodes)
       await jdFactory()
     }
   }
@@ -259,12 +260,14 @@ async function algorithm() {
 async function helpFriends() {
   if ($.isNode() && !process.env.DDFACTORY_SHARECODES) {
     console.log(`未填写助力码变量，开始账号内互助，再帮【zero205】助力`);
-    newShareCode = [...(jdFactoryShareArr || []), ...(newShareCodes || [])]
+    newShareCode = [...(jdFactoryShareArr || []), ...($.newShareCodes || [])]
   } else {
-    newShareCode = newShareCodes
+    newShareCode = $.newShareCodes
   }
+  console.log("newShareCode is ",newShareCode)
   for (let code of newShareCode) {
-    if (!code) continue
+    if (!code) continue;
+    console.log(code);
     const helpRes = await jdfactory_collectScore(code);
     if (helpRes.code === 0 && helpRes.data.bizCode === -7) {
       console.log(`助力机会已耗尽，跳出`);
@@ -367,7 +370,7 @@ async function doTask() {
         //好友助力
         if (item.status === 1) {
           console.log(`准备做此任务：${item.taskName}`);
-          // await jdfactory_collectScore(item.simpleRecordInfoVo.taskToken);
+         // await jdfactory_collectScore(item.simpleRecordInfoVo.taskToken);
         } else {
           console.log(`${item.taskName}已完成`);
         }
