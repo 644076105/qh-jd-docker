@@ -76,7 +76,7 @@
 5 1,12,22 * * * bash /cron_wrapper " node /jd_scripts/jd_bean_home.js"
 15 1,9,16,22 * * * bash /cron_wrapper " node /jd_scripts/jd_bean_box.js"
 # 领白条券
-3 0-23/6 * * * bash /cron_wrapper " node /jd_scripts/jd_baitiao.js"
+#3 0-23/6 * * * bash /cron_wrapper " node /jd_scripts/jd_baitiao.js"
 # 京东赚赚
 20 0-5/1,11 * * * bash /cron_wrapper " node /jd_scripts/jd_jdzz.js"
 # 疯狂的joy
