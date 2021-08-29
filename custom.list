@@ -34,7 +34,7 @@
 15 2 * * * bash /crom_wrapper " node /jd_scripts/jd_validate_Worker.js"
 # 宠汪汪二代目
 45 2-23/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_new.js"
-8 0-16/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_reward.js"
+#8 0-16/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_reward.js"
 35 */1 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_park.js"
 
 # 汪汪乐园

@@ -85,6 +85,7 @@ var target = process.env.JD_JOY_REWARD_NAME ? parseInt(process.env.JD_JOY_REWARD
                 return [4 /*yield*/, init()];
             case 4:
                 tasks = _b.sent();
+                console.log(tasks);
                 h = new Date().getHours();
                 config = void 0;
                 if (h >= 0 && h < 8)

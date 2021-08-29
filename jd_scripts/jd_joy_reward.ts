@@ -40,6 +40,7 @@ let target: number = process.env.JD_JOY_REWARD_NAME ? parseInt(process.env.JD_JO
     }
 
     let tasks: any = await init();
+    console.log(tasks);
     let h: number = new Date().getHours();
     let config: any;
 
