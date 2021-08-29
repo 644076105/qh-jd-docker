@@ -18,6 +18,7 @@
 30 1,6,12,21 * * * bash /cron_wrapper " node /jd_scripts/jd_jxlhb.js"
 # 京喜签到
 2 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jxsign.js"
+19 0 * * * bash /cron_wrapper " node /jd_scripts/jx_sign.js"
 #省钱大赢家 翻翻乐
 0,40 * * * * bash /cron_wrapper " node /jd_scripts/jd_big_winner.js"
 # 京东京豆签到
