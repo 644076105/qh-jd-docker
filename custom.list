@@ -30,9 +30,20 @@
 15 6-18/6 * * * bash /cron_wrapper " node /jd_scripts/jd_fruit.js"
 45 6-18/6 * * * bash /cron_wrapper " node /jd_scripts/jd_fruit_moreTask"
 # 宠汪汪
-45 */2,23 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_new.js"
+# 先运行jd_validate_Worker
+15 2 * * * bash /crom_wrapper " node /jd_scripts/jd_validate_Worker.js"
+# 宠汪汪二代目
+45 2-23/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_new.js"
 8 0-16/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_reward.js"
 35 */1 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_park.js"
+
+# 汪汪乐园
+38 5,13 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_park_task.js"
+
+## 汪汪乐园新手任务
+5 5 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_park_newtask.js"
+## 汪汪乐园互助
+55 5 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_park_help.js"
 #10 13-20/1 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_run.js"
 # 摇钱树
 23 */2 * * * bash /cron_wrapper " node /jd_scripts/jd_moneyTree.js"
