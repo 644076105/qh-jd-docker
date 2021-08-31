@@ -22,7 +22,7 @@ cron "4 10 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd
 const $ = new Env('京喜领88元红包');
 const notify = $.isNode() ? require('./sendNotify') : {};
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : {};
-const fs = require('fs')
+const fs = require('fs');
 
 let cookiesArr = [], cookie = '';
 if ($.isNode()) {
@@ -51,8 +51,8 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
   console.log('京喜领88元红包\n' +
       '活动入口：京喜app-》我的-》京喜领88元红包\n' +
       '助力逻辑：脚本会助力作者，介意请取消脚本')
-  let res = /*await getAuthorShareCode() || */[];
-  let res2 = /*await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jxhb.json') ||*/ [];
+  let res = /*await getAuthorShareCode() ||*/ [];
+  let res2 = /*await getAuthorShareCode('https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/jxhb.json') || */[];
   if (res && res.activeId) $.activeId = res.activeId;
   $.authorMyShareIds = [...((res && res.codes) || []), ...res2];
   //开启红包,获取互助码
@@ -64,7 +64,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
     await main();
   }
-  //互助
+  /*//互助
   for (let i = 0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     $.canHelp = true;
@@ -82,7 +82,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
        await $.wait(15000);
      }
      // no help
-    /*if ($.canHelp) {
+    if ($.canHelp) {
       console.log(`\n【${$.UserName}】有剩余助力机会，开始助力作者\n`)
       for (let item of $.authorMyShareIds) {
         if (!item) continue;
@@ -91,7 +91,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
         await enrollFriend(item);
         await $.wait(2500);
       }
-    }*/
+    }
   }
   //拆红包
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -106,7 +106,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       await openRedPack($.packetIdArr[i]['strUserPin'], grade);
       await $.wait(1000);
     }
-  }
+  } */
 })()
     .catch((e) => {
       $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
@@ -115,31 +115,48 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       $.done();
     })
 async function main() {
-  await getPacketIdAr()
   await joinActive();
   await getUserInfo()
 }
 //
-function getPacketIdAr(){
-  filepath = '/sharecodes/jxlhb/jd_jxlhb.json';
+function writePacketIdAr(data){
+    console.log(data)
+    filepath = './sharecodes/jxlhb/jd_jxlhb.json'
     try{
-      tPacketIdArs = fs.readFileSync(filepath,'utf-8').split('@');
-      console.log(tPacketIdArs)
-      for(let ar of tPacketIdArs){
-          try{    
-          jar = JSON.parse(ar);
-          $.packetIdArr.push(jar)
-          //console.log($.packetIdArr)
-          }
-          catch(e){
-              //$.logErr(e)
-          }
-      }
-      console.log("读取PacketIdArr完成");
-  }
-  catch (e){
-      $.logErr(e)
-  }
+        tPacketIdArs = fs.readFileSync(filepath,'utf-8').split('@');
+        console.log(tPacketIdArs)
+        isfind=false;
+        for(let ar of tPacketIdArs){
+            if(ar=='') continue;
+            try{    
+            jar = JSON.parse(ar);
+            if(jar.UserName==data.Data.strNickname){
+                isfind=true;
+                jar.strUserPin=data.Data.strUserPin;
+                
+                console.log("change",jar.UserName,"strUserPin",jar.strUserPin);
+                break;
+                }
+            }
+            catch(e){
+                //$.logErr(e)
+            }
+        }
+        if(!isfind){
+            addinfo = {
+                "strUserPin":data.Data.strUserPin,
+                "UserName":data.Data.strNickname
+            }
+            tPacketIdArs.push(JSON.stringify(addinfo));
+            console.log("no find!")
+            console.log("add ",addinfo)
+        }
+        fs.writeFileSync(filepath,tPacketIdArs.join('@'),'utf-8');
+        console.log("写入完成");
+    }
+    catch (e){
+        $.logErr(e)
+    }
 }
 //参与活动
 function joinActive() {
@@ -156,6 +173,7 @@ function joinActive() {
           data = JSON.parse(data)
           if (data.iRet === 0) {
             console.log(`活动开启成功,助力邀请码为:${data.Data.strUserPin}\n`);
+            
           } else {
             console.log(`活动开启失败：${data.sErrMsg}\n`);
           }
@@ -183,7 +201,8 @@ function getUserInfo() {
           data = JSON.parse(data)
           if (data.iRet === 0) {
             console.log(`获取助力码成功：${data.Data.strUserPin}\n`);
-            // if (data.Data['dwCurrentGrade'] >= 6) {
+            writePacketIdAr(data);
+            /*// if (data.Data['dwCurrentGrade'] >= 6) {
             //   console.log(`6个阶梯红包已全部拆完\n`)
             // } else {
               if (data.Data.strUserPin) {
@@ -192,7 +211,7 @@ function getUserInfo() {
                   userName: $.UserName
                 })
               }
-            // }
+            // }*/
           } else {
             console.log(`获取助力码失败：${data.sErrMsg}\n`);
           }

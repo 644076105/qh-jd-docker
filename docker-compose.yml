@@ -11,6 +11,8 @@ x-common: &common
     context: .
     dockerfile: ./Dockerfile
   restart: "no"
+  volumes:
+  - ./jd_scripts/sharecodes:/sharecodes
   #ports:
   #  - "8118:8118"
 services:

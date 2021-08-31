@@ -37,7 +37,7 @@ if ($.isNode()) {
     ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 $.packetIdArr = [
-     
+   
 ];
 $.activeId = '489177';
 const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
@@ -115,13 +115,14 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
       $.done();
     })
 async function main() {
-  await getPacketIdAr()
+  await getPacketIdAr();
   await joinActive();
-  await getUserInfo()
+  await getUserInfo();
+  console.log($.packetIdArr)
 }
 //
 function getPacketIdAr(){
-  filepath = '/sharecodes/jxlhb/jd_jxlhb.json';
+    filepath = './sharecodes/jxlhb/jd_jxlhb.json';
     try{
       tPacketIdArs = fs.readFileSync(filepath,'utf-8').split('@');
       console.log(tPacketIdArs)
