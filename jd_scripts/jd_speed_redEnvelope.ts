@@ -16,7 +16,24 @@ const notify = require('./sendNotify')
 dotenv.config()
 
 let UserName: string, index: number, cookie: string = '', cookiesArr: string[] = [], res: any = '';
-let shareCodes: userInfo[] = []
+let shareCodes: userInfo[] = [
+  {
+    redEnvelopeId: 'a453351f7dec4af4906365ee597aa1ce79101630289042209',
+    markedPin: 'KRN_Ih1RURzSXanH49etYccfEjvvIoFi0gSzO-IJVXw'
+  }, //qh
+  {
+    redEnvelopeId: 'e730525ed5094072a55f1721697cca4f98631630289041977',
+    markedPin: 'zgeVFUgcNf6jwTQYdBHh50O9IN5Pw7IyhpEJu1qFVH0'
+  }, // kjj
+  {
+    redEnvelopeId: 'e2881369fe544b4d8d5bf5f0ad3ffdcb46001630289042192',
+    markedPin: 'WjHKR8MWMaed4Qf_8exKcMuRnimfNLJQyLwGqRFzZuE'
+  }, //wys
+  {
+    redEnvelopeId: '77898f62356b4137b968803a90d6af7465391630289042134',
+    markedPin: 'xFaCiCPPXI6cGDMvXonBJg'
+  } //yzs
+]
 
 // let HELP_HW: string = process.env.HELP_HW ? process.env.HELP_HW : "true";
 // console.log('帮助HelloWorld:', HELP_HW)
@@ -88,7 +105,7 @@ function help(redEnvelopeId: string, inviter: string) {
         'Referer': 'https://618redpacket.jd.com/',
       }
     })
-
+    
     console.log(data)
 
     resolve()

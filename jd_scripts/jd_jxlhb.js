@@ -34,7 +34,44 @@ if ($.isNode()) {
     $.getdata("CookieJD2"),
     ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
-$.packetIdArr = [];
+$.packetIdArr = [
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuI26_Qu7VkenqnjDGPqQwyh5hihiEwKcpz_MhBVV0MXOO',
+    userName: 'jd_59417aeb07201'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuI40nlfmEUutA7t7GOL-Yk74B3czajFWB_SN5-LdTDlcT',
+    userName: 'fufangjie99'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuIyemYOyUyT7yDP7w9W71VJZyYuuK-pRZMej6Ye8exBmC',
+    userName: 'jd_fOXYiVgOshRu'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuI0XP2w5GBd5RjeRj6V05nUDCFAlswqkGpSaBowJV7_ND',
+    userName: 'jd_4d29ef950677c'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuI24Ud1aR3XJ-UWxD6IMrgVzgMfz6KDThp7i4wu1MB9_u',
+    userName: 'jd_OSnmosIfPEes'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuI3QeupZq-z26A1q2Oh0T4vg',
+    userName: '通谱坊'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuI5Hj-iVLBM_lEDrctC14Hm0',
+    userName: 'qjh198'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuIw2hD5buL9qZv8hz803m7Iubv7dG3Kf2x5l_Cvrrfh9i',
+    userName: 'jd_51d09a052e92c'
+  },
+  {
+    strUserPin: '2pXu1PxfHdBnr1-D1QOuIy81iPc7e1G_ejAtbiNxPs8',
+    userName: 'yzs981130'
+  }      
+];
 $.activeId = '489177';
 const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
 
@@ -67,15 +104,18 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
     $.max = false;
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
      for (let code of $.packetIdArr) {
+       console.log("code of $.packetIdArr is ",code);
        if (!code) continue;
        if ($.UserName === code['userName']) continue;
        if (!$.canHelp) break
        if ($.max) break
        console.log(`【${$.UserName}】去助力【${code['userName']}】邀请码：${code['strUserPin']}`);
        await enrollFriend(code['strUserPin']);
-       await $.wait(2500);
+       //修改等待时间
+       await $.wait(15000);
      }
-    if ($.canHelp) {
+     // no help
+    /*if ($.canHelp) {
       console.log(`\n【${$.UserName}】有剩余助力机会，开始助力作者\n`)
       for (let item of $.authorMyShareIds) {
         if (!item) continue;
@@ -84,7 +124,7 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
         await enrollFriend(item);
         await $.wait(2500);
       }
-    }
+    }*/
   }
   //拆红包
   for (let i = 0; i < cookiesArr.length; i++) {
@@ -110,6 +150,10 @@ const BASE_URL = 'https://wq.jd.com/cubeactive/steprewardv3'
 async function main() {
   await joinActive();
   await getUserInfo()
+}
+//
+function getPacketIdAr(){
+  
 }
 //参与活动
 function joinActive() {

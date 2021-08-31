@@ -11,6 +11,8 @@ x-common: &common
     context: .
     dockerfile: ./Dockerfile
   restart: "no"
+  #ports:
+  #  - "8118:8118"
 services:
   jdyzs:
     <<: [ *logger, *common ]
