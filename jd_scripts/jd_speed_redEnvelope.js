@@ -134,7 +134,7 @@ function makeShareCodes() {
                         redEnvelopeId: data.data.redEnvelopeId,
                         markedPin: data.data.markedPin
                     };
-                    console.log(userInfo);
+                    //console.log(userInfo)
                     shareCodes.push(userInfo);
                     resolve();
                     return [2 /*return*/];
@@ -156,10 +156,12 @@ function help(redEnvelopeId, inviter) {
                             'User-Agent': TS_USER_AGENTS_1["default"],
                             'Referer': 'https://618redpacket.jd.com/'
                         }
-                    })];
+                    })
+                    //console.log(data)
+                ];
                 case 1:
                     data = (_a.sent()).data;
-                    console.log(data);
+                    //console.log(data)
                     resolve();
                     return [2 /*return*/];
             }

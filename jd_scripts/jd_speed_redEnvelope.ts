@@ -73,7 +73,7 @@ function makeShareCodes() {
       redEnvelopeId: data.data.redEnvelopeId,
       markedPin: data.data.markedPin
     }
-    console.log(userInfo)
+    //console.log(userInfo)
     shareCodes.push(userInfo)
     resolve()
   })
@@ -91,7 +91,7 @@ function help(redEnvelopeId: string, inviter: string) {
       }
     })
     
-    console.log(data)
+    //console.log(data)
 
     resolve()
   })
