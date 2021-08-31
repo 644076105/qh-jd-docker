@@ -1,0 +1,8 @@
+#京喜领红包
+44 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jxlhb-help.js"
+
+# 全民开红包
+#12 8-23/8 * * * bash /cron_wrapper " node /jd_scripts/jd_redPacket.js"
+
+# 发财大赢家互助
+30 9 * * * bash /cron_wrapper " node /jd_scripts/jd_speed_redEnvelope.js"

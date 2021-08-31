@@ -16,6 +16,17 @@ x-common: &common
   #ports:
   #  - "8118:8118"
 services:
+  # 单脚本多账号互助脚本运行容器
+  jdhelp:
+    image: qh-jd-docker-help:latest
+    build:
+      context: .
+      dockerfile: ./DockerHelpfile
+    restart: "no"
+    container_name: jdhelp
+    volumes: 
+    - ./env/all:/all
+    - ./env/envhelp:/env
   jdyzs:
     <<: [ *logger, *common ]
     container_name: jdyzs
