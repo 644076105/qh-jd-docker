@@ -15,7 +15,7 @@
 #新潮品牌狂欢
 #20 1,21 * * * bash /cron_wrapper " node /jd_scripts/jd_mcxhd.js"
 #京喜领红包
-4 10 * * * bash /cron_wrapper " node /jd_scripts/jd_jxlhb.js"
+#4 10 * * * bash /cron_wrapper " node /jd_scripts/jd_jxlhb.js"
 # 京喜签到
 2 0 * * * bash /cron_wrapper " node /jd_scripts/jd_jxsign.js"
 19 0 * * * bash /cron_wrapper " node /jd_scripts/jx_sign.js"
@@ -35,7 +35,10 @@
 15 2 * * * bash /cron_wrapper " node /jd_scripts/jd_validate_Worker.js"
 # 宠汪汪二代目
 45 2-23/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_new.js"
-#8 0-16/2 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_reward.js"
+
+50 23,7,15 * * * bash /cron_wrapper " node /jd_scripts/jd_validate_Worker.js"
+0 0-16/8 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_reward.js"
+
 35 3/1 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_park.js"
 50 3-21/3 * * * bash /cron_wrapper " node /jd_scripts/jd_joy_steal.js"
 
@@ -54,7 +57,7 @@
 # 种豆得豆
 10 7-22/1 * * * bash /cron_wrapper " node /jd_scripts/jd_plantBean.js"
 # 全民开红包
-12 8-23/8 * * * bash /cron_wrapper " node /jd_scripts/jd_redPacket.js"
+#12 8-23/8 * * * bash /cron_wrapper " node /jd_scripts/jd_redPacket.js"
 # 进店领豆
 10 0 * * * bash /cron_wrapper " node /jd_scripts/jd_shop.js"
 # 东东超市
@@ -117,7 +120,7 @@
 8 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_speed.js"
 #10 12 * * * bash /cron_wrapper " node /jd_scripts/jd_crazy_joy_bonus.js"
 # 财富岛
-35 * * * * bash /cron_wrapper " node /jd_scripts/jd_cfd.js"
+35 * * * * bash /cron_wrapper " node /jd_scrips/jd_cfd.js"
 0 0 * * * bash /cron_wrapper " node /jd_scripts/jd_cfd_withdraw.js"
 
 #20 9 * * 6 bash /cron_wrapper " node /jd_scripts/jd_delCoupon.js"
@@ -128,7 +131,7 @@
 # 京东健康
 13 1,6,22 * * * bash /cron_wrapper " node /jd_scripts/jd_health.js"
 5-45/20 * * * * bash /cron_wrapper " node /jd_scripts/jd_health_collect.js"
-#
+#幸运大转盘
 10 10 * * * bash /cron_wrapper " node /jd_scripts/jd_market_lottery.js"
 # 金贴
 5 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_jin_tie.js"
@@ -232,3 +235,6 @@
 # 伊利养牛
 38 5,18 * * * bash /cron_wrapper " node /jd_scripts/jd_ylyn.js"
 
+# 检查cookie
+ 
+#1 6-22/3 * * * node /jd_scripts/jd_checkCookie.js

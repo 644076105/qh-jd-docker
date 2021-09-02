@@ -8,7 +8,7 @@ RUN date
 
 WORKDIR /
 RUN mkdir /logs
-COPY custom_help.list /custom.list
+COPY custom-help.list /custom.list
 COPY cron_wrapper /cron_wrapper
 COPY jd_scripts /jd_scripts
 WORKDIR /jd_scripts

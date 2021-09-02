@@ -18,6 +18,7 @@ x-common: &common
 services:
   # 单脚本多账号互助脚本运行容器
   jdhelp:
+    network_mode: "host"
     image: qh-jd-docker-help:latest
     build:
       context: .
@@ -81,5 +82,10 @@ services:
     volumes:
     - ./env/all:/all
     - ./env/envqjh137:/env
-  
+  jdxyz:
+    <<: [ *logger, *common ]
+    container_name: jdxyz
+    volumes:
+    - ./env/all:/all
+    - ./env/envxyz:/env
   

@@ -16,9 +16,7 @@ const notify = require('./sendNotify')
 dotenv.config()
 
 let UserName: string, index: number, cookie: string = '', cookiesArr: string[] = [], res: any = '';
-let shareCodes: userInfo[] = [
-  
-]
+let shareCodes: userInfo[] = []
 
 // let HELP_HW: string = process.env.HELP_HW ? process.env.HELP_HW : "true";
 // console.log('帮助HelloWorld:', HELP_HW)
@@ -73,7 +71,7 @@ function makeShareCodes() {
       redEnvelopeId: data.data.redEnvelopeId,
       markedPin: data.data.markedPin
     }
-    //console.log(userInfo)
+    console.log(userInfo)
     shareCodes.push(userInfo)
     resolve()
   })
@@ -90,8 +88,8 @@ function help(redEnvelopeId: string, inviter: string) {
         'Referer': 'https://618redpacket.jd.com/',
       }
     })
-    
-    //console.log(data)
+
+    console.log(data)
 
     resolve()
   })
