@@ -121,7 +121,7 @@ async function main() {
 }
 //
 function getPacketIdAr(){
-  filepath = '/sharecodes/jxlhb/jd_jxlhb.json';
+  filepath = 'sharecodes/jxlhb/jd_jxlhb.json';
     try{
       tPacketIdArs = fs.readFileSync(filepath,'utf-8').split('@');
       console.log(tPacketIdArs)

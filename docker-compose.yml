@@ -13,8 +13,8 @@ x-common: &common
   restart: "no"
   volumes:
   - ./jd_scripts/sharecodes:/sharecodes
-  #ports:
-  #  - "8118:8118"
+  extra_hosts:
+  - "api.sharecode.ga:104.21.36.46"
 services:
   # 单脚本多账号互助脚本运行容器
   jdhelp:
@@ -28,64 +28,75 @@ services:
     volumes: 
     - ./env/all:/all
     - ./env/envhelp:/env
+    - ./logs/help:/logs
   jdyzs:
     <<: [ *logger, *common ]
     container_name: jdyzs
     volumes:
     - ./env/all:/all
     - ./env/envyzs:/env
+    - ./logs/yzs:/logs
   jdqh:
     <<: [ *logger, *common ]
     container_name: jdqh
     volumes:
     - ./env/all:/all
     - ./env/envqh:/env
+    - ./logs/qh:/logs
   jdwys:
     <<: [ *logger, *common ]
     container_name: jdwys
     volumes:
     - ./env/all:/all
     - ./env/envwys:/env
+    - ./logs/wys:/logs
   jdkjj:
     <<: [ *logger, *common ]
     container_name: jdkjj
     volumes:
     - ./env/all:/all
     - ./env/envkjj:/env
+    - ./logs/kjj:/logs
   jdffj136:
     <<: [ *logger, *common ]
     container_name: jdffj136
     volumes:
     - ./env/all:/all
     - ./env/envffj136:/env
+    - ./logs/ffj136:/logs
   jdffj180:
     <<: [ *logger, *common ]
     container_name: jdffj180
     volumes:
     - ./env/all:/all
     - ./env/envffj180:/env
+    - ./logs/ffj180:/logs
   jdqjh198:
     <<: [ *logger, *common ]
     container_name: jdqjh198
     volumes:
     - ./env/all:/all
     - ./env/envqjh198:/env
+    - ./logs/qjh198:/logs
   jdqjh180:
     <<: [ *logger, *common ]
     container_name: jdqjh180
     volumes:
     - ./env/all:/all
     - ./env/envqjh180:/env
+    - ./logs/qjh180:/logs
   jdqjh137:
     <<: [ *logger, *common ]
     container_name: jdqjh137
     volumes:
     - ./env/all:/all
     - ./env/envqjh137:/env
+    - ./logs/qjh137:/logs
   jdxyz:
     <<: [ *logger, *common ]
     container_name: jdxyz
     volumes:
     - ./env/all:/all
     - ./env/envxyz:/env
+    - ./logs/xyz:/logs
   
