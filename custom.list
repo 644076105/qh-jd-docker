@@ -99,7 +99,7 @@
 
 #30 7,23 * * * bash /cron_wrapper " node /jd_scripts/jd_crazy_joy.js"
 # 京东汽车兑换
-0 0 * * * bash /cron_wrapper " node /jd_scripts/jd_car_exchange.js"
+0 0 * * * bash /cron_wrapper " node /jd_scripts/jd_car_exchange_xh.js"
 #23 7 * * * bash /cron_wrapper " node /jd_scripts/jd_get_share_code.js"
 # 京东图书
 38 8,12,18 * * * bash /cron_wrapper " node /jd_scripts/jd_bookshop.js"
@@ -171,7 +171,7 @@
 #东东电竞经理
 24 7,15,23 * * * bash /cron_wrapper " node /jd_scripts/jd_dianjing.js"
 # 店铺签到
-3 0,8,16 * * * bash /cron_wrapper " node /jd_scripts/jd_dpqd.js"
+3 8 * * * bash /cron_wrapper " node /jd_scripts/jd_dpqd.js"
 # 发财大赢家助力
 4 10,12 * * * bash /cron_wrapper " node /jd_scripts/jd_fcdyj.js"
 # 发财翻翻乐
@@ -184,14 +184,14 @@
 14 0 * * * bash /cron_wrapper " node /jd_scripts/jd_industryLottery.js"
 
 # 京东到家
-#3 0,6 * * * bash /cron_wrapper " node /jd_scripts/jddj_bean.js"
+3 8,15 * * * bash /cron_wrapper " node /jd_scripts/jddj_bean.js"
 10 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jddj_fruit.js"
 ## 定时收集water
 3/10 * * * * bash /cron_wrapper " node /jd_scripts/jddj_collectWater.js"
 
 8/15 * * * * bash /cron_wrapper " node /jd_scripts/jddj_getPoints.js"
 
-30 7-21/2 * * * bash /cron_wrapper " node /jd_scripts/jddj_plantBeans.js"
+30 7-21/7 * * * bash /cron_wrapper " node /jd_scripts/jddj_plantBeans.js"
 
 
 # 开学充电站
@@ -211,7 +211,7 @@
 # 汽车生活节
 
 # 京东签到图形验证
-10 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_sign_graphics.js"
+#10 0,6 * * * bash /cron_wrapper " node /jd_scripts/jd_sign_graphics.js"
 # 牛牛 伊利
 30 5-23/2 * * * bash /cron_wrapper " node /jd_scripts/jd_yili_cow.js"
 # 健康社区收取能量

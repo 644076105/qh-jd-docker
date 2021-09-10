@@ -36,12 +36,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getJxToken = exports.decrypt = exports.requestAlgo = exports.jd_joy_invokeKey = exports.getRandomNumberByRange = exports.wait = exports.requireConfig = exports.getFarmShareCode = exports.getBeanShareCode = exports.TotalBean = void 0;
+exports.h5st = exports.getJxToken = exports.decrypt = exports.requestAlgo = exports.jd_joy_invokeKey = exports.getRandomNumberByRange = exports.wait = exports.requireConfig = exports.getFarmShareCode = exports.getBeanShareCode = exports.TotalBean = void 0;
 var axios_1 = require("axios");
 var date_fns_1 = require("date-fns");
 var dotenv = require("dotenv");
 var ts_md5_1 = require("ts-md5");
 var CryptoJS = require('crypto-js');
+var util = require('util');
 dotenv.config();
 var appId = 10028, fingerprint, token = '', enCryptMethodJD;
 var USER_AGENTS = [
@@ -84,6 +85,14 @@ var USER_AGENTS = [
 ];
 var jd_joy_invokeKey = "value1";
 exports.jd_joy_invokeKey = jd_joy_invokeKey;
+function TotalBean(cookie) {
+    return {
+        cookie: cookie,
+        isLogin: true,
+        nickName: ''
+    };
+}
+exports.TotalBean = TotalBean;
 function getRandomNumberByRange(start, end) {
     return Math.floor(Math.random() * (end - start) + start);
 }
@@ -142,45 +151,6 @@ function getFarmShareCode(cookie) {
     });
 }
 exports.getFarmShareCode = getFarmShareCode;
-function TotalBean(cookie) {
-    var totalBean = {
-        isLogin: true,
-        nickName: ''
-    };
-    return new Promise(function (resolve) {
-        axios_1["default"].get('https://me-api.jd.com/user_new/info/GetJDUserInfoUnion', {
-            headers: {
-                Host: "me-api.jd.com",
-                Connection: "keep-alive",
-                Cookie: cookie,
-                "User-Agent": USER_AGENT,
-                "Accept-Language": "zh-cn",
-                "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
-                "Accept-Encoding": "gzip, deflate, br"
-            }
-        }).then(function (res) {
-            if (res.data) {
-                var data = res.data;
-                if (data['retcode'] === "1001") {
-                    totalBean.isLogin = false; //cookie过期
-                }
-                if (data['retcode'] === "0" && data['data'] && data.data.hasOwnProperty("userInfo")) {
-                    totalBean.isLogin = true;
-                    totalBean.nickName = data.data.userInfo.baseInfo.nickname;
-                }
-                resolve(totalBean);
-            }
-            else {
-                console.log('京东服务器返回空数据');
-                resolve(totalBean);
-            }
-        })["catch"](function (e) {
-            console.log('Error:', e);
-            resolve(totalBean);
-        });
-    });
-}
-exports.TotalBean = TotalBean;
 function requireConfig() {
     var cookiesArr = [];
     return new Promise(function (resolve) {
@@ -196,13 +166,7 @@ function requireConfig() {
     });
 }
 exports.requireConfig = requireConfig;
-function wait(t) {
-    return new Promise(function (resolve) {
-        setTimeout(function () {
-            resolve();
-        }, t);
-    });
-}
+var wait = util.promisify(setTimeout);
 exports.wait = wait;
 function requestAlgo() {
     return __awaiter(this, void 0, void 0, function () {
@@ -298,6 +262,15 @@ function decrypt(stk, url) {
     return encodeURIComponent(["".concat(timestamp.toString()), "".concat(fingerprint.toString()), "".concat(appId.toString()), "".concat(token), "".concat(hash2)].join(";"));
 }
 exports.decrypt = decrypt;
+function h5st(url, stk, params) {
+    for (var _i = 0, _a = Object.entries(params); _i < _a.length; _i++) {
+        var _b = _a[_i], key = _b[0], val = _b[1];
+        url += "&" + key + "=" + val;
+    }
+    url += '&h5st=' + decrypt(stk, url);
+    return url;
+}
+exports.h5st = h5st;
 function getJxToken(cookie) {
     function generateStr(input) {
         var src = 'abcdefghijklmnopqrstuvwxyz1234567890';
