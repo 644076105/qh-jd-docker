@@ -237,4 +237,6 @@
 
 # 检查cookie
  
-#1 6-22/3 * * * node /jd_scripts/jd_checkCookie.js
+#1 10,22 * * * node /jd_scripts/jd_checkCookie.js
+# 内容鉴赏官
+15 3,6 * * * bash /cron_wrapper " node /jd_scripts/jd_connoisseur.js"
