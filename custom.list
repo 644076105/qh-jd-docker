@@ -1,5 +1,5 @@
 # 女装盲盒
-#35 1,22 * * * bash /cron_wrapper " node /jd_scripts/jd_nzmh.js"
+35 1,23 * * * bash /cron_wrapper " node /jd_scripts/jd_nzmh.js"
 # 京东极速版红包
 20 0,22 * * * bash /cron_wrapper " node /jd_scripts/jd_speed_redpocke.js"
 # 超级直播间红包雨
