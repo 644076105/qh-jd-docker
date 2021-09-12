@@ -171,7 +171,7 @@
 #东东电竞经理
 24 7,15,23 * * * bash /cron_wrapper " node /jd_scripts/jd_dianjing.js"
 # 店铺签到
-3 8 * * * bash /cron_wrapper " node /jd_scripts/jd_dpqd.js"
+#3 8 * * * bash /cron_wrapper " node /jd_scripts/jd_dpqd.js"
 # 发财大赢家助力
 4 10,12 * * * bash /cron_wrapper " node /jd_scripts/jd_fcdyj.js"
 # 发财翻翻乐
@@ -238,5 +238,3 @@
 # 检查cookie
  
 #1 10,22 * * * node /jd_scripts/jd_checkCookie.js
-# 内容鉴赏官
-15 3,6 * * * bash /cron_wrapper " node /jd_scripts/jd_connoisseur.js"

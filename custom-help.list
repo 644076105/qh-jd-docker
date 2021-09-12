@@ -8,4 +8,7 @@
 30 9 * * * bash /cron_wrapper " node /jd_scripts/jd_speed_redEnvelope.js"
 
 # 检查cookie
-11 0-23/3 * * * node /jd_scripts/jd_checkCookie.js
+11 0-23/3 * * * bash /cron_wrapper " node /jd_scripts/jd_checkCookie.js"
+
+# 内容鉴赏官
+15 3,6 * * * bash /cron_wrapper " node /jd_scripts/jd_connoisseur.js"

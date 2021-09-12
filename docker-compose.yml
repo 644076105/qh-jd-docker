@@ -13,8 +13,8 @@ x-common: &common
   restart: "no"
   volumes:
   - ./jd_scripts/sharecodes:/sharecodes
-  extra_hosts:
-  - "api.sharecode.ga:104.21.36.46"
+    #extra_hosts:
+    #- "api.sharecode.xyz:104.21.36.46"
 services:
   # 单脚本多账号互助脚本运行容器
   jdhelp:
