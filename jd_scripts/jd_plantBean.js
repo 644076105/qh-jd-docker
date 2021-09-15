@@ -73,6 +73,12 @@ let randomCount = $.isNode() ? 20 : 5;
     await notify.sendNotify(`${$.name}上报失败`, runTimesErr, '', '\n\n你好,世界!')
   }
 })()
+  .catch((e) => {
+    $.log("", `❌ ${$.name}, 失败! 原因: ${e}!`, "");
+  })
+  .finally(() => {
+    $.done();
+  });
 
 async function jdPlantBean() {
   try {
@@ -133,10 +139,11 @@ function runTimes(){
         console.log('上报失败', err)
         reject(err)
       } else {
-        //if (data === '1' || data === '0') {
+        if (data === '1' || data === '0') {
           console.log('上报成功')
           resolve()
         }
+      }
     })
   })
 }

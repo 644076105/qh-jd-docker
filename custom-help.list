@@ -12,3 +12,8 @@
 
 # 内容鉴赏官
 15 3,6 * * * bash /cron_wrapper " node /jd_scripts/jd_connoisseur.js"
+
+
+# 开学新花样
+0 0 13-22 9 * bash /cron_wrapper " node /jd_scripts/jd_qycl.js"
+
