@@ -17,3 +17,6 @@
 # 开学新花样
 0 0 13-22 9 * bash /cron_wrapper " node /jd_scripts/jd_qycl.js"
 
+# 东东世界
+30 3,15 * * * bash /cron_wrapper " node /jd_scripts/jd_ddWorld.js"
+
