@@ -11,10 +11,9 @@
  */
 
 import axios from 'axios';
-import {requireConfig, getBeanShareCode, getFarmShareCode, wait, requestAlgo, h5st, getJxToken} from './TS_USER_AGENTS';
+import {requireConfig, getBeanShareCode, getFarmShareCode, wait, requestAlgo, h5st, getJxToken, getRandomNumberByRange} from './TS_USER_AGENTS';
 import {Md5} from 'ts-md5'
 import * as dotenv from 'dotenv';
-import {rejects} from "assert";
 
 dotenv.config()
 let cookie: string = '', res: any = '', shareCodes: string[] = [], isCollector: Boolean = false, USER_AGENT = 'jdpingou;android;4.13.0;10;b21fede89fb4bc77;network/wifi;model/M2004J7AC;appBuild/17690;partner/xiaomi;;session/704;aid/b21fede89fb4bc77;oaid/dcb5f3e835497cc3;pap/JA2019_3111789;brand/Xiaomi;eu/8313831616035373;fv/7333732616631643;Mozilla/5.0 (Linux; Android 10; M2004J7AC Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/91.0.4472.120 Mobile Safari/537.36', token: any = {};
@@ -41,7 +40,7 @@ interface Params {
   dwPrizeLv?: number,
   dwPrizeType?: number,
   strPrizePool?: string,
-  dwFirst?: number,
+  dwFirst?: any,
   dwIdentityType?: number,
   strBussKey?: string,
   strMyShareId?: string,
@@ -57,6 +56,12 @@ interface Params {
   showAreaTaskFlag?: number,
   strVersion?: string,
   strIndex?: string
+  strToken?: string
+  dwGetType?: number,
+  ddwSeaonStart?: number,
+  size?: number,
+  type?: number,
+  strLT?: string,
 }
 
 let UserName: string, index: number;
@@ -87,29 +92,31 @@ let UserName: string, index: number;
         strPhoneID: token.strPhoneID,
         strPgUUNum: token.strPgUUNum
       })
-    console.log('离线收益:', res.Business.ddwCoin)
     await wait(2000)
 
     // 寻宝
     for (let xb of res.XbStatus.XBDetail) {
-      res = await api('user/TreasureHunt', '_cfd_t,bizCode,dwEnv,ptag,source,strIndex,strZone', {strIndex: xb.strIndex})
-      if (res.iRet === 0) {
-        console.log('发现宝物:', res.AwardInfo.ddwValue)
-      } else {
-        console.log('寻宝失败:', res)
+      if (xb.dwRemainCnt !== 0) {
+        res = await api('user/TreasureHunt', '_cfd_t,bizCode,dwEnv,ptag,source,strIndex,strZone', {strIndex: xb.strIndex})
+        if (res.iRet === 0) {
+          console.log('发现宝物:', res.AwardInfo.ddwValue)
+        } else {
+          console.log('寻宝失败:', res)
+          break
+        }
+        await wait(2000)
       }
-      await wait(2000)
     }
 
     // 任务⬇️
-    console.log('任务列表开始')
+    console.log('底部任务列表开始')
     for (let j = 0; j < 30; j++) {
       if (await task() === 0) {
         break
       }
       await wait(3000)
     }
-    console.log('任务列表结束')
+    console.log('底部任务列表结束')
 
     // 升级建筑
     while (1) {
@@ -153,42 +160,50 @@ let UserName: string, index: number;
     }
 
     // 珍珠
-    /*
-    res = await api('user/ComposeGameState', '', {dwFirst: 1})
-    let strDT: string = res.strDT, strMyShareId: string = res.strMyShareId
-    console.log(`已合成${res.dwCurProgress}个珍珠`)
-    for (let i = 0; i < 8 - res.dwCurProgress; i++) {
+    res = await api('user/ComposePearlState', '', {__t: Date.now(), dwGetType: 0})
+    let dwCurProgress: number = res.dwCurProgress, strDT: string = res.strDT, strMyShareId: string = res.strMyShareId, ddwSeasonStartTm: number = res.ddwSeasonStartTm
+    let strLT: string = res.oPT[res.ddwCurTime % (res.oPT.length)]
+    console.log(`已合成${dwCurProgress}个珍珠，${res.ddwVirHb / 100}元红包`)
+
+    if (res.dayDrawInfo.dwIsDraw === 0) {
+      res = await api("user/GetPearlDailyReward", "__t,strZone", {__t: Date.now()})
+      if (res.iRet === 0) {
+        res = await api("user/PearlDailyDraw", "__t,ddwSeaonStart,strToken,strZone", {__t: Date.now(), ddwSeaonStart: ddwSeasonStartTm, strToken: res.strToken})
+        if (res.strPrizeName) {
+          console.log('抽奖获得：', res.strPrizeName)
+        } else {
+          console.log('抽奖失败？', res)
+        }
+      }
+    }
+    // 模拟合成
+    if (dwCurProgress < 8 && strDT) {
       console.log('继续合成')
       let RealTmReport: number = getRandomNumberByRange(10, 20)
       console.log('本次合成需要上报：', RealTmReport)
       for (let j = 0; j < RealTmReport; j++) {
-        res = await api('user/RealTmReport', '',
-          {dwIdentityType: 0, strBussKey: 'composegame', strMyShareId: strMyShareId, ddwCount: 5})
+        res = await api('user/RealTmReport', '', {__t: Date.now(), dwIdentityType: 0, strBussKey: 'composegame', strMyShareId: strMyShareId, ddwCount: 10})
         if (res.iRet === 0)
           console.log(`游戏中途上报${j + 1}：OK`)
-        await wait(5000)
+        await wait(2000)
+        if (getRandomNumberByRange(1, 4) === 2) {
+          res = await api('user/ComposePearlAward', '__t,size,strBT,strZone,type', {__t: Date.now(), size: 1, strBT: strDT, type: 4})
+          if (res.iRet === 0) {
+            console.log(`上报得红包:${res.ddwAwardHb / 100}红包，当前有${res.ddwVirHb / 100}`)
+          } else {
+            console.log('上报得红包失败：', res)
+          }
+          await wait(1000)
+        }
       }
-      res = await api('user/ComposeGameAddProcess', '__t,strBT,strZone', {__t: Date.now(), strBT: strDT})
-      console.log('游戏完成，已合成', res.dwCurProgress)
-      console.log('游戏完成，等待3s')
-      await wait(3000)
-    }
-    await wait(2000)
-
-    // 珍珠领奖
-    res = await api('user/ComposeGameState', '', {dwFirst: 1})
-    for (let stage of res.stagelist) {
-      if (res.dwCurProgress >= stage.dwCurStageEndCnt && stage.dwIsAward === 0) {
-        let awardRes: any = await api('user/ComposeGameAward', '__t,dwCurStageEndCnt,strZone', {
-          __t: Date.now(),
-          dwCurStageEndCnt: stage.dwCurStageEndCnt
-        })
-        console.log('珍珠领奖：', awardRes.ddwCoin, awardRes.addMonety)
-        await wait(3000)
+      // 珍珠奖励
+      res = await api(`user/ComposePearlAddProcess`, '__t,strBT,strLT,strZone', {__t: Date.now(), strBT: strDT, strLT: strLT})
+      if (res.iRet === 0) {
+        console.log(`合成成功：获得${res.ddwAwardHb / 100}红包，当前有${res.dwCurProgress}珍珠，${res.ddwVirHb / 100}红包`)
+      } else {
+        console.log('合成失败：', res)
       }
     }
-    await wait(2000)
-    */
 
     // 签到 助力奖励
     res = await api('story/GetTakeAggrPage', '_cfd_t,bizCode,dwEnv,ptag,source,strZone')
@@ -372,7 +387,7 @@ let UserName: string, index: number;
     for (let t of tasks.Data.TaskList) {
       if ([1, 2].indexOf(t.dwOrderId) > -1 && t.dwCompleteNum < t.dwTargetNum && t.strTaskName != '热气球接待20位游客') {
         console.log('开始任务➡️:', t.strTaskName)
-        res = await api('DoTask', '_cfd_t,bizCode,configExtra,dwEnv,ptag,source,strZone,taskId', {taskId: t.ddwTaskId, configExtra: ''})
+        res = await api('DoTask', '_cfd_t,bizCode,configExtra,dwEnv,ptag,source,strZone,taskId', {taskId: t.ddwTaskId, configExtra: ''}, 'right')
         await wait(t.dwLookTime * 1000)
         if (res.ret === 0) {
           console.log('任务完成')
@@ -386,10 +401,10 @@ let UserName: string, index: number;
     await wait(2000)
     for (let t of tasks.Data.TaskList) {
       if (t.dwCompleteNum === t.dwTargetNum && t.dwAwardStatus === 2) {
-        res = await api('Award', '_cfd_t,bizCode,configExtra,dwEnv,ptag,source,strZone,taskId', {taskId: t.ddwTaskId})
+        res = await api('Award', '_cfd_t,bizCode,configExtra,dwEnv,ptag,source,strZone,taskId', {taskId: t.ddwTaskId}, 'right')
         await wait(1000)
         if (res.ret === 0) {
-          console.log(`领奖成功:`, JSON.parse(res.data.prizeInfo.trim()).ddwCoin)
+          console.log(`领奖成功:`, res)
         } else {
           console.log('领奖失败', res)
         }
@@ -458,13 +473,15 @@ let UserName: string, index: number;
   }
 })()
 
-function api(fn: string, stk: string, params: Params = {}) {
+function api(fn: string, stk: string, params: Params = {}, taskPosition = '') {
   return new Promise((resolve, reject) => {
     let url: string = '';
-    if (['GetUserTaskStatusList', 'Award', 'DoTask'].includes(fn))
-      url = `https://m.jingxi.com/newtasksys/newtasksys_front/${fn}?strZone=jxbfd&bizCode=jxbfddch&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=&showAreaTaskFlag=0&_stk=${encodeURIComponent(stk)}&_ste=1&_=${Date.now()}&sceneval=2`
-    else
+    if (['GetUserTaskStatusList', 'Award', 'DoTask'].includes(fn)) {
+      let bizCode: string = taskPosition === 'right' ? 'jxbfddch' : 'jxbfd'
+      url = `https://m.jingxi.com/newtasksys/newtasksys_front/${fn}?strZone=jxbfd&bizCode=${bizCode}&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=&showAreaTaskFlag=0&_stk=${encodeURIComponent(stk)}&_ste=1&_=${Date.now()}&sceneval=2`
+    } else {
       url = `https://m.jingxi.com/jxbfd/${fn}?strZone=jxbfd&bizCode=jxbfd&source=jxbfd&dwEnv=7&_cfd_t=${Date.now()}&ptag=&_ste=1&_=${Date.now()}&sceneval=2&_stk=${encodeURIComponent(stk)}`
+    }
     url = h5st(url, stk, params, 10032)
     axios.get(url, {
       headers: {
@@ -493,6 +510,7 @@ async function task() {
       if (res.ret === 0) {
         res = JSON.parse(res.data.prizeInfo)
         console.log(`领奖成功:`, res.ddwCoin, res.ddwMoney)
+        await wait(1000)
         return 1
       } else {
         console.log('领奖失败:', res)
@@ -532,7 +550,7 @@ function makeShareCodes() {
     shareCodes.push(res.strMyShareId)
     let pin: string = cookie.match(/pt_pin=([^;]*)/)![1]
     pin = Md5.hashStr(pin)
-    axios.get(`https://api.jdsharecode.xyz/api/autoInsert?db=jxcfd&code=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 10000})
+    axios.get(`https://api.jdsharecode.xyz/api/autoInsert/jxcfd?sharecode=${res.strMyShareId}&bean=${bean}&farm=${farm}&pin=${pin}`, {timeout: 10000})
       .then(res => {
         if (res.data.code === 200)
           console.log('已自动提交助力码')

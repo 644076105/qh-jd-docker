@@ -11,7 +11,7 @@
 #5G超级盲盒
 0 0-23/4 * * * bash /cron_wrapper " node /jd_scripts/jd_mohe.js"
 #明星小店
-0 1,21 * * * bash /cron_wrapper " node /jd_scripts/jd_star_shop.js"
+12 19 19-30 9 * bash /cron_wrapper " node /jd_scripts/jd_star_shop.js"
 #新潮品牌狂欢
 #20 1,21 * * * bash /cron_wrapper " node /jd_scripts/jd_mcxhd.js"
 #京喜领红包
@@ -128,7 +128,7 @@
 # 京东家庭号
 10 6,7 * * * bash /cron_wrapper " node /jd_scripts/jd_family.js"
 # 京东直播领京豆
-30-50/5 12,23 * * * bash /cron_wrapper " node /jd_scripts/jd_live.js"
+50 12-14 * * * bash /cron_wrapper " node /jd_scripts/jd_live.js"
 # 京东健康
 13 1,6,22 * * * bash /cron_wrapper " node /jd_scripts/jd_health.js"
 5-45/20 * * * * bash /cron_wrapper " node /jd_scripts/jd_health_collect.js"
@@ -241,7 +241,7 @@
 #1 10,22 * * * node /jd_scripts/jd_checkCookie.js
 
 #影像馆
-23 15 13-30 9 * bash /cron_wrapper " node /jd_scripts/jd_film_museum.js"
+#23 15 13-30 9 * bash /cron_wrapper " node /jd_scripts/jd_film_museum.js"
 
 #企有此理
 30 0 * * * bash /cron_wrapper " node /jd_scripts/jd_qycl.js"
@@ -249,3 +249,12 @@
 #手机狂欢城
 0 0-18/6 * * * bash /cron_wrapper " node /jd_scripts/jd_carnivalcity.js"
 
+
+#粉丝互动
+14 0,1 * * * bash /cron_wrapper " node /jd_scripts/jd_fan.js"
+
+#phone 狂制糟吧
+6 6 * * * bash /cron_wrapper " node /jd_scripts/jd_vivo.js"
+
+#京东小魔方
+31 2,8 * * * bash /cron_wrapper " node /jd_scripts/jd_jmf.js"
