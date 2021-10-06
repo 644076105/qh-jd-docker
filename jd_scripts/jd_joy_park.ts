@@ -14,7 +14,7 @@ let joyId1: number;
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)![1])
     $.index = i + 1;
     $.isLogin = true;
-    $.nickName = '';
+    $.nickName = $.UserName;
     console.log(`\n开始【京东账号${$.index}】${$.nickName || $.UserName}\n`);
 
     // let joy: any = await joyList();
@@ -73,7 +73,7 @@ let joyId1: number;
 
 function api(fn: string, body: Object): Object {
   return new Promise(async resolve => {
-    let {data} = await axios.post("https://api.m.jd.com/",
+    let {data}: any = await axios.post("https://api.m.jd.com/",
       `functionId=${fn}&body=${JSON.stringify(body)}&_t=${Date.now()}&appid=activities_platform`
       , {
         headers: {
@@ -91,7 +91,7 @@ function api(fn: string, body: Object): Object {
 
 function joyList() {
   return new Promise(async resolve => {
-    let {data} = await axios.get(`https://api.m.jd.com/?functionId=joyList&body={%22linkId%22:%22LsQNxL7iWDlXUs6cFl-AAg%22}&_t=${Date.now()}&appid=activities_platform`, {
+    let {data}: any = await axios.get(`https://api.m.jd.com/?functionId=joyList&body={%22linkId%22:%22LsQNxL7iWDlXUs6cFl-AAg%22}&_t=${Date.now()}&appid=activities_platform`, {
       headers: {
         'host': 'api.m.jd.com',
         'User-agent': USER_AGENT,

@@ -36,71 +36,41 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-/**
- * 每天检测cookie是否有效
- * cron: 10 * * * *
- */
 var axios_1 = require("axios");
-var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
-var notify = require('./sendNotify');
-var cookie = '', UserName, index, errMsg = '';
 !(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var cookiesArr, i;
+    var res, file;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+            case 0: return [4 /*yield*/, api('https://prodev.m.jd.com/mall/active/2tZssTgnQsiUqhmg5ooLSHY9XSeN/index.html')];
             case 1:
-                cookiesArr = _a.sent();
-                i = 0;
-                _a.label = 2;
+                res = _a.sent();
+                file = 'https://storage.360buyimg.com/' + res.match(/htmlSourceUrl":"([^"]*)/)[1];
+                return [4 /*yield*/, api(file)];
             case 2:
-                if (!(i < cookiesArr.length)) return [3 /*break*/, 5];
-                cookie = cookiesArr[i];
-                UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
-                index = i + 1;
-                return [4 /*yield*/, api(index, cookie, UserName)];
+                res = _a.sent();
+                file = 'https:' + res.match(/src="([^"]*)/)[1];
+                return [4 /*yield*/, api(file)];
             case 3:
-                _a.sent();
-                _a.label = 4;
-            case 4:
-                i++;
-                return [3 /*break*/, 2];
-            case 5:
-                if (!errMsg) return [3 /*break*/, 7];
-                return [4 /*yield*/, notify.sendNotify("Cookie失效", errMsg, '', '你好，世界！')];
-            case 6:
-                _a.sent();
-                _a.label = 7;
-            case 7: return [2 /*return*/];
+                res = _a.sent();
+                file = res.match(/h=n\(\d+\),v="([^"]*)/)[1];
+                console.log('invokeKey:', file);
+                return [2 /*return*/];
         }
     });
 }); })();
-function api(index, cookie, username) {
+function api(url) {
     return __awaiter(this, void 0, void 0, function () {
         var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios_1["default"].get("https://me-api.jd.com/user_new/info/GetJDUserInfoUnion", {
+                case 0: return [4 /*yield*/, axios_1["default"].get(url, {
                         headers: {
-                            Host: "me-api.jd.com",
-                            Connection: "keep-alive",
-                            Cookie: cookie,
-                            "User-Agent": TS_USER_AGENTS_1["default"],
-                            "Accept-Language": "zh-cn",
-                            "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
-                            "Accept-Encoding": "gzip, deflate, br"
+                            'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'
                         }
                     })];
                 case 1:
                     data = (_a.sent()).data;
-                    if (data.retcode === '0') {
-                        console.log(index, '✅', username);
-                    }
-                    else {
-                        console.log(index, '❌', username);
-                        errMsg += index + " " + username + "\n";
-                    }
-                    return [2 /*return*/];
+                    return [2 /*return*/, data];
             }
         });
     });

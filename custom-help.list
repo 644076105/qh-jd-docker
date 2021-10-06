@@ -18,10 +18,10 @@
 0 0 13-22 9 * bash /cron_wrapper " node /jd_scripts/jd_qycl.js"
 
 # 东东世界
-30 3,15 * * * bash /cron_wrapper " node /jd_scripts/jd_ddWorld.js"
+30 3,15 * * * bash /cron_wrapper " node /jd_scripts/jd_ddworld2.js"
 
 #东东玩家
-45 0 * * * bash /cron_wrapper " node /jd_scripts/jd_ddwj.js"
+#45 0 * * * bash /cron_wrapper " node /jd_scripts/jd_ddwj.js"
 
 #热血心跳,狂解压
 5 6,18 1-16,21-30 9,10 * bash /cron_wrapper " node /jd_scripts/jd_decompression.js"
