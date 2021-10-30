@@ -53,7 +53,7 @@ const JD_API_HOST = `https://api.m.jd.com`;
     $.needhelp = true
     $.canDraw = false
     $.canHelp = true;
-    $.linkid = "yMVR-_QKRd2Mq27xguJG-w"
+    $.linkid = "PFbUR7wtwUcQ860Sn8WRfw"
     //开红包查询
     for (let i = 0; i < cookiesArr.length && $.needhelp; i++) {
         cookie = cookiesArr[i];
@@ -77,21 +77,21 @@ const JD_API_HOST = `https://api.m.jd.com`;
                 console.log(`\n检测到您已填助力码${$.rid}，开始助力\n`)
                 await help($.rid, $.inviter, 1)
                 if (!$.canRun) {
-                    break;
+                    continue;
                 }
                 await $.wait(1000)
                 await help($.rid, $.inviter, 2)
             }
         }
     }
-    if (new Date().getHours() >= 10) {
+    /*if (new Date().getHours() >= 10) {
         await getAuthorShareCode()
-        for (let i = 0; i < cookiesArr.length; i++) {
-            if (cookiesArr[i]) {
+        if ($.authorCode && $.authorCode.length) {
+            for (let i = 0; i < cookiesArr.length; i++) {
                 cookie = cookiesArr[i];
                 $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
                 $.canRun = true
-                console.log(`\n${$.UserName} 去助力【zero205】\n`)
+                console.log(`\n${$.UserName} 去助力作者\n`)
                 for (let j = 0; j < $.authorCode.length; j++) {
                     let item = $.authorCode[j];
                     await help(item.redEnvelopeId, item.inviter, 1)
@@ -104,6 +104,7 @@ const JD_API_HOST = `https://api.m.jd.com`;
             }
         }
     }
+    */
     for (let i = 0; i < cookiesArr.length; i++) {
         cookie = cookiesArr[i];
         $.canWx = true
@@ -311,7 +312,7 @@ function help(rid, inviter, type) {
 function getAuthorShareCode() {
     return new Promise(resolve => {
         $.get({
-            url: "https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/dyj.json",
+            url: "https://raw.fastgit.org/shufflewzc/updateTeam/main/shareCodes/dyj.json",
             headers: {
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
             }

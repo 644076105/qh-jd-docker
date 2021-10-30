@@ -44,7 +44,7 @@ var tokenKey = '', token = '', bearer = '';
     var cookiesArr, i, _i, _a, t, items, _b, items_1, item, name_1, e_1, i;
     return __generator(this, function (_c) {
         switch (_c.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+            case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 1:
                 cookiesArr = _c.sent();
                 i = 0;
@@ -79,7 +79,7 @@ var tokenKey = '', token = '', bearer = '';
                 // 签到
                 res = _c.sent();
                 console.log('签到成功：', res.score);
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 9:
                 _c.sent();
                 return [3 /*break*/, 15];
@@ -95,7 +95,7 @@ var tokenKey = '', token = '', bearer = '';
                 return [4 /*yield*/, api('do_task', "taskToken=" + item.taskToken + "&task_id=" + t.taskId + "&task_type=" + t.taskType + "&task_name=" + encodeURIComponent(name_1))];
             case 12:
                 res = _c.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(5000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
             case 13:
                 _c.sent();
                 console.log('任务完成：', res.score);
@@ -143,7 +143,7 @@ var tokenKey = '', token = '', bearer = '';
                 return [4 /*yield*/, api('do_assist_task', "taskToken=" + shareCodesInternal[0].taskToken + "&inviter_id=" + shareCodesInternal[0].inviter_id)];
             case 24:
                 res = _c.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
             case 25:
                 _c.sent();
                 console.log('助力结果：', res);

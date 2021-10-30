@@ -51,10 +51,10 @@ var cookie = '', res = '', shareCodes = [], homePageInfo, activeid = '', jxToken
     var _c, _d;
     return __generator(this, function (_e) {
         switch (_e.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requestAlgo()];
+            case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requestAlgo)()];
             case 1:
                 _e.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 2:
                 cookiesArr = _e.sent();
                 i = 0;
@@ -64,7 +64,7 @@ var cookie = '', res = '', shareCodes = [], homePageInfo, activeid = '', jxToken
                 cookie = cookiesArr[i];
                 UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
                 index = i + 1;
-                return [4 /*yield*/, TS_USER_AGENTS_1.TotalBean(cookie)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.TotalBean)(cookie)];
             case 4:
                 _a = _e.sent(), isLogin = _a.isLogin, nickName = _a.nickName;
                 if (!isLogin) {
@@ -72,7 +72,7 @@ var cookie = '', res = '', shareCodes = [], homePageInfo, activeid = '', jxToken
                     return [3 /*break*/, 16];
                 }
                 console.log("\n\u5F00\u59CB\u3010\u4EAC\u4E1C\u8D26\u53F7" + index + "\u3011" + (nickName || UserName) + "\n");
-                jxToken = TS_USER_AGENTS_1.getJxToken(cookie);
+                jxToken = (0, TS_USER_AGENTS_1.getJxToken)(cookie);
                 return [4 /*yield*/, api('queryservice/GetHomePageInfo', 'activeid,activekey,channel,isgift,isquerypicksite,sceneid', { isgift: 0, isquerypicksite: 0 })];
             case 5:
                 homePageInfo = _e.sent();
@@ -177,7 +177,7 @@ function api(fn, stk, params) {
                                 url += "&" + key + "=" + params[key];
                         }
                     }
-                    url += '&h5st=' + TS_USER_AGENTS_1.decrypt(stk, url);
+                    url += '&h5st=' + (0, TS_USER_AGENTS_1.decrypt)(stk, url);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -218,7 +218,7 @@ function api1(fn, stk, params) {
                                 url += "&" + key + "=" + params[key];
                         }
                     }
-                    url += '&h5st=' + TS_USER_AGENTS_1.decrypt(stk, url);
+                    url += '&h5st=' + (0, TS_USER_AGENTS_1.decrypt)(stk, url);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -259,7 +259,7 @@ function api2(fn, stk, params) {
                                 url += "&" + key + "=" + params[key];
                         }
                     }
-                    url += '&h5st=' + TS_USER_AGENTS_1.decrypt(stk, url);
+                    url += '&h5st=' + (0, TS_USER_AGENTS_1.decrypt)(stk, url);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -300,7 +300,7 @@ function api3(fn, stk, params) {
                                 url += "&" + key + "=" + params[key];
                         }
                     }
-                    url += '&h5st=' + TS_USER_AGENTS_1.decrypt(stk, url);
+                    url += '&h5st=' + (0, TS_USER_AGENTS_1.decrypt)(stk, url);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -350,7 +350,7 @@ function getTask() {
                     return [4 /*yield*/, taskAPI('Award', 'bizCode,source,taskId', { taskId: t.taskId })];
                 case 3:
                     doTaskRes = _b.sent();
-                    return [4 /*yield*/, TS_USER_AGENTS_1.wait(4000)];
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(4000)];
                 case 4:
                     _b.sent();
                     if (doTaskRes.ret === 0) {
@@ -366,7 +366,7 @@ function getTask() {
                     doTaskRes = _b.sent();
                     if (!(doTaskRes.ret === 0)) return [3 /*break*/, 8];
                     console.log('任务完成');
-                    return [4 /*yield*/, TS_USER_AGENTS_1.wait(5000)];
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
                 case 7:
                     _b.sent();
                     _b.label = 8;
@@ -396,7 +396,7 @@ function taskAPI(fn, stk, params) {
                                 url += "&" + key + "=" + params[key];
                         }
                     }
-                    url += '&h5st=' + TS_USER_AGENTS_1.decrypt(stk, url);
+                    url += '&h5st=' + (0, TS_USER_AGENTS_1.decrypt)(stk, url);
                     return [4 /*yield*/, axios_1["default"].get(url, {
                             headers: {
                                 'Origin': 'https://st.jingxi.com',

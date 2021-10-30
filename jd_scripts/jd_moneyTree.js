@@ -44,7 +44,7 @@ var cookie = '', res = '', UserName, index;
     var _d, _e, _f, _g, _h, _j;
     return __generator(this, function (_k) {
         switch (_k.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+            case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 1:
                 cookiesArr = _k.sent();
                 i = 0;
@@ -94,7 +94,7 @@ var cookie = '', res = '', UserName, index;
                 return [4 /*yield*/, api('harvest', body)];
             case 4:
                 res = _k.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(3000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(3000)];
             case 5:
                 _k.sent();
                 if (res.resultData.code === '200') {
@@ -109,7 +109,7 @@ var cookie = '', res = '', UserName, index;
                 return [4 /*yield*/, api('signIndex', body)];
             case 6:
                 res = _k.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(3000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(3000)];
             case 7:
                 _k.sent();
                 if (!(((_d = res.resultData.data) === null || _d === void 0 ? void 0 : _d.canSign) === 2)) return [3 /*break*/, 12];
@@ -134,7 +134,7 @@ var cookie = '', res = '', UserName, index;
             case 12:
                 console.log('今日已签到');
                 _k.label = 13;
-            case 13: return [4 /*yield*/, TS_USER_AGENTS_1.wait(3000)
+            case 13: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(3000)
                 // 获取任务
             ];
             case 14:
@@ -167,7 +167,7 @@ var cookie = '', res = '', UserName, index;
                 res = _k.sent();
                 // console.log('dayWork⬇️')
                 // console.log(JSON.stringify(res))
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(3000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(3000)];
             case 17:
                 // console.log('dayWork⬇️')
                 // console.log(JSON.stringify(res))
@@ -190,7 +190,7 @@ var cookie = '', res = '', UserName, index;
                 return [4 /*yield*/, api('doWork', body)];
             case 19:
                 _k.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
             case 20:
                 _k.sent();
                 console.log('时段签到:', res);
@@ -203,7 +203,7 @@ var cookie = '', res = '', UserName, index;
                 return [4 /*yield*/, api('doWork', body)];
             case 22:
                 res = _k.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
             case 23:
                 _k.sent();
                 console.log('领取任务:', (_g = (_f = res.resultData) === null || _f === void 0 ? void 0 : _f.data) === null || _g === void 0 ? void 0 : _g.opMsg);
@@ -215,14 +215,14 @@ var cookie = '', res = '', UserName, index;
                 res = _k.sent();
                 console.log('任务开始:', (_h = res.resultData) === null || _h === void 0 ? void 0 : _h.msg);
                 readTime = t.url.split('readTime=')[1];
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(readTime * 1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(readTime * 1000)];
             case 26:
                 _k.sent();
                 return [4 /*yield*/, mission('finishReadMission', "%7B%22missionId%22%3A%22" + t.mid + "%22%2C%22readTime%22%3A" + readTime + "%7D", t.url)];
             case 27:
                 res = _k.sent();
                 console.log('任务完成:', (_j = res.resultData) === null || _j === void 0 ? void 0 : _j.msg);
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
             case 28:
                 _k.sent();
                 _k.label = 29;
@@ -239,14 +239,14 @@ var cookie = '', res = '', UserName, index;
             case 30:
                 res = _k.sent();
                 console.log(t.workName, res.resultData.data.opMsg, res.resultData.data.prizeAmount);
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
             case 31:
                 _k.sent();
                 _k.label = 32;
             case 32:
                 _b++;
                 return [3 /*break*/, 18];
-            case 33: return [4 /*yield*/, TS_USER_AGENTS_1.wait(3000)];
+            case 33: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(3000)];
             case 34:
                 _k.sent();
                 _k.label = 35;

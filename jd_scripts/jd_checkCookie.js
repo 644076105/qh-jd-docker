@@ -48,7 +48,7 @@ var cookie = '', UserName, index, errMsg = '';
     var cookiesArr, i;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+            case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 1:
                 cookiesArr = _a.sent();
                 i = 0;

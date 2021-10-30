@@ -49,18 +49,18 @@ var cookie = '', res = '', UserName, message = '';
     var cookiesArr, exist, current, _i, _a, t;
     return __generator(this, function (_b) {
         switch (_b.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requestAlgo(10001)];
+            case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requestAlgo)(10001)];
             case 1:
                 _b.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 2:
                 cookiesArr = _b.sent();
                 cookie = cookiesArr[0];
                 UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
                 console.log("\n\u5F00\u59CB\u3010\u4EAC\u4E1C\u8D26\u53F71\u3011" + UserName + "\n");
                 try {
-                    fs_1.accessSync('jxgc_stock.json');
-                    exist = JSON.parse(fs_1.readFileSync('jxgc_stock.json').toString());
+                    (0, fs_1.accessSync)('jxgc_stock.json');
+                    exist = JSON.parse((0, fs_1.readFileSync)('jxgc_stock.json').toString());
                 }
                 catch (e) {
                     exist = [];
@@ -77,10 +77,10 @@ var cookie = '', res = '', UserName, message = '';
                         message += t.name + '\n';
                     }
                 }
-                fs_1.writeFileSync('./jxgc_stock.json', JSON.stringify(current));
+                (0, fs_1.writeFileSync)('./jxgc_stock.json', JSON.stringify(current));
                 if (message) {
                     console.log('send...');
-                    sendNotify_1.sendNotify('京喜工厂可生产', message);
+                    (0, sendNotify_1.sendNotify)('京喜工厂可生产', message);
                 }
                 return [2 /*return*/];
         }
@@ -93,7 +93,7 @@ function api() {
             switch (_a.label) {
                 case 0:
                     url = "https://wq.jd.com/dreamfactory/diminfo/GetCommodityList?zone=dream_factory&flag=2&pageNo=1&pageSize=12&_time=" + Date.now() + "&_stk=_time%2Cflag%2CpageNo%2CpageSize%2Czone&_ste=1&_=" + Date.now() + "&sceneval=2";
-                    url = TS_USER_AGENTS_1.h5st(url, '_time,flag,pageNo,pageSize,zone', {}, 10001);
+                    url = (0, TS_USER_AGENTS_1.h5st)(url, '_time,flag,pageNo,pageSize,zone', {}, 10001);
                     return [4 /*yield*/, axios_1["default"].get(url, {
                             headers: {
                                 'Host': 'wq.jd.com',

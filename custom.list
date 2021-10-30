@@ -262,3 +262,6 @@
 # 芥么 wechat mini program
 37 7,18 * * * bash /cron_wrapper " node /jd_scripts/jd_genz.js"
 47 7,18 * * * bash /cron_wrapper " node /jd_scripts/jd_jmsign.js"
+
+# 攒金币 赢大礼
+22 0,8 0-28 9,10 * bash /cron_wrapper " node /jd_scripts/jd_GoldcoinToGift.js"

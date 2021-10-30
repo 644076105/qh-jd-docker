@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM python:3.8-alpine
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 RUN apk add --no-cache tzdata moreutils git nodejs npm curl bash
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -10,8 +10,10 @@ WORKDIR /
 RUN mkdir /logs
 COPY custom-help.list /custom.list
 COPY cron_wrapper /cron_wrapper
+COPY cron_wrapper_py /cron_wrapper_py
 COPY jd_scripts /jd_scripts
 WORKDIR /jd_scripts
 RUN npm install
+RUN pip3 install -r requirements.txt
 RUN crontab /custom.list
 CMD crontab -l && crond -f

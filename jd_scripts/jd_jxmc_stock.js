@@ -44,27 +44,27 @@ exports.__esModule = true;
 var axios_1 = require("axios");
 var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
 var fs_1 = require("fs");
-var notify = require('./sendNotify'), jxmcToken = require('./utils/jd_jxmc.js').getToken;
+var notify = require('./sendNotify'), jxmcToken = require('./utils/jd_jxmc.js').token;
 var cookie = '', res = '', UserName;
 !(function () { return __awaiter(void 0, void 0, void 0, function () {
     var cookiesArr, exist, items, message, token, _i, _a, good, allItems, arr, result, i, len, _b, result_1, group, _c, group_1, id, _d, _e, t, _f, _g, j;
     return __generator(this, function (_h) {
         switch (_h.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requestAlgo()];
+            case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requestAlgo)()];
             case 1:
                 _h.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 2:
                 cookiesArr = _h.sent();
-                cookie = cookiesArr[TS_USER_AGENTS_1.getRandomNumberByRange(0, cookiesArr.length)];
+                cookie = cookiesArr[(0, TS_USER_AGENTS_1.getRandomNumberByRange)(0, cookiesArr.length)];
                 UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
                 try {
-                    fs_1.accessSync('./jxmc_stock.json');
+                    (0, fs_1.accessSync)('./jxmc_stock.json');
                 }
                 catch (e) {
-                    fs_1.writeFileSync('./jxmc_stock.json', '{}', 'utf-8');
+                    (0, fs_1.writeFileSync)('./jxmc_stock.json', '{}', 'utf-8');
                 }
-                exist = fs_1.readFileSync('./jxmc_stock.json', 'utf-8');
+                exist = (0, fs_1.readFileSync)('./jxmc_stock.json', 'utf-8');
                 try {
                     exist = JSON.parse(exist);
                 }
@@ -84,7 +84,7 @@ var cookie = '', res = '', UserName;
                     })];
             case 4:
                 res = _h.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
             case 5:
                 _h.sent();
                 for (_i = 0, _a = res.data.goodslist; _i < _a.length; _i++) {
@@ -118,7 +118,7 @@ var cookie = '', res = '', UserName;
                 return [4 /*yield*/, getEgg(items)];
             case 7:
                 res = _h.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 8:
                 _h.sent();
                 for (_d = 0, _e = res.result; _d < _e.length; _d++) {
@@ -131,7 +131,7 @@ var cookie = '', res = '', UserName;
                 _b++;
                 return [3 /*break*/, 6];
             case 10:
-                fs_1.writeFileSync('./jxmc_stock.json', JSON.stringify(exist, null, 2), 'utf-8');
+                (0, fs_1.writeFileSync)('./jxmc_stock.json', JSON.stringify(exist, null, 2), 'utf-8');
                 for (_f = 0, _g = Object.keys(exist); _f < _g.length; _f++) {
                     j = _g[_f];
                     if (allItems.indexOf(j) > -1) {
@@ -157,7 +157,7 @@ function api(fn, stk, params) {
             switch (_a.label) {
                 case 0:
                     url = "https://m.jingxi.com/jxmc/" + fn + "?channel=7&sceneid=1001&_stk=" + encodeURIComponent(stk) + "&_ste=1&sceneval=2";
-                    url = TS_USER_AGENTS_1.h5st(url, stk, params, 10028);
+                    url = (0, TS_USER_AGENTS_1.h5st)(url, stk, params, 10028);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);

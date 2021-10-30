@@ -1,0 +1,15 @@
+#!/bin/bash
+exec 1<>/proc/1/fd/1
+exec 2<>/proc/1/fd/2
+set -o allexport
+source /all
+source /env
+cd /jd_scripts || {
+  echo [error]: no jd_scripts dir
+  exit 1
+}
+cmd='bash -c'
+logpyfile=$(echo "$*" | grep -o '[^ /]*.py')
+logdir='/logs'
+echo "run time:$(date)" > ${logdir}/$logpyfile-log
+$cmd "$*" | sed "s/^/[$logpyfile]: /g" >> ${logdir}/$log-log

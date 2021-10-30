@@ -46,17 +46,19 @@ var date_fns_1 = require("date-fns");
 var axios_1 = require("axios");
 var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
 var sendNotify_1 = require("./sendNotify");
+var path = require("path");
 var cookie = '', res = '', UserName, index;
 !(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var cookiesArr, i, productionId, investedElectric, needElectric, progress, factoryId, flag, j, _i, _a, t, j;
+    var cookiesArr, except, i, productionId, investedElectric, needElectric, progress, factoryId, flag, j, _i, _a, t, j;
     return __generator(this, function (_b) {
         switch (_b.label) {
-            case 0: return [4 /*yield*/, TS_USER_AGENTS_1.requestAlgo(10001)];
+            case 0: return [4 /*yield*/, (0, TS_USER_AGENTS_1.requestAlgo)(10001)];
             case 1:
                 _b.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.requireConfig()];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.requireConfig)()];
             case 2:
                 cookiesArr = _b.sent();
+                except = (0, TS_USER_AGENTS_1.exceptCookie)(path.basename(__filename));
                 i = 0;
                 _b.label = 3;
             case 3:
@@ -65,6 +67,10 @@ var cookie = '', res = '', UserName, index;
                 UserName = decodeURIComponent(cookie.match(/pt_pin=([^;]*)/)[1]);
                 index = i + 1;
                 console.log("\n\u5F00\u59CB\u3010\u4EAC\u4E1C\u8D26\u53F7" + index + "\u3011" + UserName + "\n");
+                if (except.includes(encodeURIComponent(UserName))) {
+                    console.log('已设置跳过');
+                    return [3 /*break*/, 28];
+                }
                 return [4 /*yield*/, api('userinfo/GetUserInfo', '_time,materialTuanId,materialTuanPin,needPickSiteInfo,pin,sharePin,shareType,source,zone', {
                         pin: '',
                         sharePin: '',
@@ -77,7 +83,7 @@ var cookie = '', res = '', UserName, index;
             case 4:
                 res = _b.sent();
                 productionId = 0;
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 5:
                 _b.sent();
                 try {
@@ -85,7 +91,7 @@ var cookie = '', res = '', UserName, index;
                     investedElectric = res.data.productionList[0].investedElectric, needElectric = res.data.productionList[0].needElectric, progress = (investedElectric / needElectric * 100).toFixed(2);
                     console.log('生产进度:', progress);
                     if (progress === '100.00') {
-                        sendNotify_1.sendNotify("京喜工厂生产完成", "\u8D26\u53F7" + index + " " + UserName);
+                        (0, sendNotify_1.sendNotify)("京喜工厂生产完成", "\u8D26\u53F7" + index + " " + UserName);
                         return [3 /*break*/, 28];
                     }
                 }
@@ -97,7 +103,7 @@ var cookie = '', res = '', UserName, index;
                 return [4 /*yield*/, api('generator/QueryCurrentElectricityQuantity', '_time,factoryid,querytype,zone', { factoryid: factoryId, querytype: 1 })];
             case 6:
                 res = _b.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 7:
                 _b.sent();
                 flag = -1;
@@ -123,7 +129,7 @@ var cookie = '', res = '', UserName, index;
                     ? console.log('发电机收取成功:', res.data.CollectElectricity)
                     : console.log('发电机收取失败:', res);
                 _b.label = 9;
-            case 9: return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)
+            case 9: return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)
                 // 投入电力
             ];
             case 10:
@@ -142,7 +148,7 @@ var cookie = '', res = '', UserName, index;
                     console.log('投入电力失败:', res);
                     return [3 /*break*/, 15];
                 }
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(3000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(3000)];
             case 13:
                 _b.sent();
                 _b.label = 14;
@@ -152,7 +158,7 @@ var cookie = '', res = '', UserName, index;
             case 15: return [4 /*yield*/, api('friend/QueryHireReward', '_time,zone')];
             case 16:
                 res = _b.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 17:
                 _b.sent();
                 _i = 0, _a = res.data.hireReward;
@@ -160,11 +166,11 @@ var cookie = '', res = '', UserName, index;
             case 18:
                 if (!(_i < _a.length)) return [3 /*break*/, 22];
                 t = _a[_i];
-                if (!(t.date !== date_fns_1.format(Date.now(), "yyyyMMdd"))) return [3 /*break*/, 21];
+                if (!(t.date !== (0, date_fns_1.format)(Date.now(), "yyyyMMdd"))) return [3 /*break*/, 21];
                 return [4 /*yield*/, api('friend/HireAward', '_time,date,type,zone', { date: t.date })];
             case 19:
                 res = _b.sent();
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(1000)];
             case 20:
                 _b.sent();
                 if (res.ret === 0)
@@ -184,7 +190,7 @@ var cookie = '', res = '', UserName, index;
                 if ((_b.sent()) === 0) {
                     return [3 /*break*/, 27];
                 }
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(4000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(4000)];
             case 25:
                 _b.sent();
                 _b.label = 26;
@@ -206,11 +212,11 @@ function task() {
         var _i, _a, t;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, api('GetUserTaskStatusList', '_time,bizCode,source')];
+                case 0: return [4 /*yield*/, api('GetUserTaskStatusList', '_time,bizCode,showAreaTaskFlag,source', { showAreaTaskFlag: 1, bizCode: 'dream_factory' })];
                 case 1:
                     res = _b.sent();
                     console.log('GetUserTaskStatusList: 刷新任务列表');
-                    return [4 /*yield*/, TS_USER_AGENTS_1.wait(2000)];
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(2000)];
                 case 2:
                     _b.sent();
                     _i = 0, _a = res.data.userTaskStatusList;
@@ -221,12 +227,12 @@ function task() {
                     if (!(t.awardStatus === 2)) return [3 /*break*/, 12];
                     if (!(t.completedTimes >= t.targetTimes)) return [3 /*break*/, 7];
                     console.log('可领奖:', t.taskName);
-                    return [4 /*yield*/, api('Award', '_time,bizCode,source,taskId', { taskId: t.taskId })];
+                    return [4 /*yield*/, api('Award', '_time,bizCode,source,taskId', { taskId: t.taskId, bizCode: t.bizCode })];
                 case 4:
                     res = _b.sent();
                     if (!(res.ret === 0)) return [3 /*break*/, 6];
                     console.log('领奖成功:', res.data.prizeInfo.trim() * 1);
-                    return [4 /*yield*/, TS_USER_AGENTS_1.wait(4000)];
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(4000)];
                 case 5:
                     _b.sent();
                     return [2 /*return*/, 1];
@@ -236,15 +242,15 @@ function task() {
                 case 7:
                     if (!(t.dateType === 2 && t.completedTimes < t.targetTimes && [2, 6, 9].indexOf(t.taskType) > -1)) return [3 /*break*/, 12];
                     console.log('任务开始:', t.taskName);
-                    return [4 /*yield*/, api('DoTask', '_time,bizCode,configExtra,source,taskId', { configExtra: '', taskId: t.taskId })];
+                    return [4 /*yield*/, api('DoTask', '_time,bizCode,configExtra,source,taskId', { configExtra: '', taskId: t.taskId, bizCode: t.bizCode })];
                 case 8:
                     res = _b.sent();
-                    return [4 /*yield*/, TS_USER_AGENTS_1.wait(5000)];
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(5000)];
                 case 9:
                     _b.sent();
                     if (!(res.ret === 0)) return [3 /*break*/, 11];
                     console.log('任务完成');
-                    return [4 /*yield*/, TS_USER_AGENTS_1.wait(3000)];
+                    return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(3000)];
                 case 10:
                     _b.sent();
                     return [2 /*return*/, 1];
@@ -264,10 +270,10 @@ function api(fn, stk, params) {
     return new Promise(function (resolve, reject) {
         var url = '';
         if (['GetUserTaskStatusList', 'DoTask', 'Award'].indexOf(fn) > -1)
-            url = "https://m.jingxi.com/newtasksys/newtasksys_front/" + fn + "?source=dreamfactory&bizCode=dream_factory&_time=" + Date.now() + "&_stk=" + encodeURIComponent(stk) + "&_ste=1&_=" + Date.now() + "&sceneval=2";
+            url = "https://m.jingxi.com/newtasksys/newtasksys_front/" + fn + "?source=dreamfactory&_time=" + Date.now() + "&_stk=" + encodeURIComponent(stk) + "&_ste=1&_=" + Date.now() + "&sceneval=2";
         else
             url = "https://m.jingxi.com/dreamfactory/" + fn + "?zone=dream_factory&_time=" + Date.now() + "&_stk=" + encodeURIComponent(stk) + "&_ste=1&_=" + Date.now() + "&sceneval=2";
-        url = TS_USER_AGENTS_1.h5st(url, stk, params, 10001);
+        url = (0, TS_USER_AGENTS_1.h5st)(url, stk, params, 10001);
         axios_1["default"].get(url, {
             headers: {
                 'Cookie': cookie,

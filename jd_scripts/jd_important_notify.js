@@ -52,23 +52,23 @@ dotenv.config();
             case 0:
                 env = '';
                 try {
-                    fs_1.accessSync('.env');
-                    env = fs_1.readFileSync('.env').toString();
+                    (0, fs_1.accessSync)('.env');
+                    env = (0, fs_1.readFileSync)('.env').toString();
                 }
                 catch (e) {
-                    fs_1.writeFileSync('.env', '');
+                    (0, fs_1.writeFileSync)('.env', '');
                 }
                 lastMsg = process.env.ImportantNotify || '';
                 latestMsg = '2021-10-04  自爆了，重新提交';
                 if (!(lastMsg !== latestMsg)) return [3 /*break*/, 2];
-                return [4 /*yield*/, sendNotify_1.sendNotify("@所有人", latestMsg)];
+                return [4 /*yield*/, (0, sendNotify_1.sendNotify)("@所有人", latestMsg)];
             case 1:
                 _a.sent();
                 if (env.indexOf('ImportantNotify') > -1)
                     env = env.replace(/ImportantNotify.*/, "ImportantNotify='" + latestMsg + "'");
                 else
                     env += "ImportantNotify='" + latestMsg + "'\n";
-                fs_1.writeFileSync('.env', env);
+                (0, fs_1.writeFileSync)('.env', env);
                 _a.label = 2;
             case 2: return [2 /*return*/];
         }

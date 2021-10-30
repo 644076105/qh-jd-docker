@@ -50,7 +50,7 @@ var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
-                console.log("\n==================\u811A\u672C\u6267\u884C- \u5317\u4EAC\u65F6\u95F4(UTC+8)\uFF1A" + date_fns_1.format(Date.now(), 'yyyy-MM-dd HH:mm:ss') + "\n\n");
+                console.log("\n==================\u811A\u672C\u6267\u884C- \u5317\u4EAC\u65F6\u95F4(UTC+8)\uFF1A" + (0, date_fns_1.format)(Date.now(), 'yyyy-MM-dd HH:mm:ss') + "\n\n");
                 cars = ['bean', 'farm', 'health', 'jxfactory', 'pet'];
                 db = cars[getRandomNumberByRange(0, 5)];
                 num = getRandomNumberByRange(5, 20);
@@ -69,7 +69,7 @@ var TS_USER_AGENTS_1 = require("./TS_USER_AGENTS");
                 return [4 /*yield*/, runTimes()];
             case 3:
                 _b.apply(_a, _c.concat([_d.sent()]));
-                return [4 /*yield*/, TS_USER_AGENTS_1.wait(Math.floor(getRandomNumberByRange(1, 5)) * 1000)];
+                return [4 /*yield*/, (0, TS_USER_AGENTS_1.wait)(Math.floor(getRandomNumberByRange(1, 5)) * 1000)];
             case 4:
                 _d.sent();
                 _d.label = 5;
